@@ -26,19 +26,24 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes("node_modules")) {
-            if (id.includes("@mui")) return "vendor-mui";
-            if (id.includes("date-fns")) return "vendor-date";
-            if (id.includes("axios")) return "vendor-axios";
-            if (id.includes("zod")) return "vendor-zod";
-            if (id.includes("react-hook-form") || id.includes("@hookform"))
-              return "vendor-hookform";
+            if (id.includes("react") || id.includes("scheduler"))
+              return "vendor-react";
+            if (id.includes("leaflet") || id.includes("react-leaflet"))
+              return "vendor-maps";
+            if (
+              id.includes("@mui") ||
+              id.includes("@emotion") ||
+              id.includes("clsx")
+            )
+              return "vendor-mui";
             if (id.includes("zustand")) return "vendor-zustand";
-            if (id.includes("js-cookie")) return "vendor-cookie";
-            if (id.includes("jwt-decode")) return "vendor-jwt";
-            if (id.includes("react-icons")) return "vendor-icons";
             if (id.includes("@tanstack/react-query"))
               return "vendor-react-query";
-            if (id.includes("react")) return "vendor-react";
+            if (id.includes("react-hook-form") || id.includes("@hookform"))
+              return "vendor-hookform";
+            if (id.includes("axios")) return "vendor-axios";
+            if (id.includes("date-fns")) return "vendor-date";
+            if (id.includes("react-icons")) return "vendor-icons";
           }
         },
       },

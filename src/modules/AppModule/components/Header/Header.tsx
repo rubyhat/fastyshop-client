@@ -4,6 +4,7 @@ import { HeaderNavigation } from "../HeaderNavigation";
 import { HeaderLogotype } from "../HeaderLogotype";
 
 export const Header = () => {
+  return <Box data-testid="header"></Box>; // todo: temp
   return (
     <Box component="header" data-testid="header">
       <AppBar position="static">

@@ -13,9 +13,8 @@ export const Footer = () => {
         <Grid container>
           <Grid size={12}>
             <Box sx={{ py: 2 }}>
-              <Box>logo</Box>
               <Typography component="p" variant="body1">
-                © {currentYear}. Product name
+                © {currentYear}. FastyShop
               </Typography>
             </Box>
           </Grid>

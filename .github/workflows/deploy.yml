@@ -41,8 +41,8 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: "dist"
-          target: "/home/deploy/apps/fastyshop-client/dist"
+          source: "dist/*"
+          target: "/home/deploy/apps/fastyshop-client"
           overwrite: true
 
       - name: 🔐 Настройка прав доступа

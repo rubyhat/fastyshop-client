@@ -9,47 +9,49 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: 📥 Checkout репозитория
         uses: actions/checkout@v3
 
-      - name: Install pnpm
+      - name: 📦 Установка pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 8
 
-      - name: Install dependencies
+      - name: 📦 Установка зависимостей
         run: pnpm install
 
-      - name: Build app
+      - name: 🛠 Сборка фронтенда
         run: pnpm build
 
-      - name: Clean remote dist folder
+      - name: 🧹 Очистка старого dist/ на сервере
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            echo "🧹 Очистка старых файлов dist/ на сервере..."
-            rm -rf /home/deploy/apps/fastyshop-client/dist/*
+            echo "🧹 Удаляем старые файлы dist/"
+            sudo rm -rf /home/deploy/apps/fastyshop-client/dist
+            sudo mkdir -p /home/deploy/apps/fastyshop-client/dist
+            sudo chown -R $USER:$USER /home/deploy/apps/fastyshop-client/dist
 
-      - name: Copy build to VPS
+      - name: 📤 Копирование новых файлов dist/ на сервер
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           source: "dist/*"
-          target: "/home/deploy/apps/fastyshop-client"
+          target: "/home/deploy/apps/fastyshop-client/dist"
           overwrite: true
 
-      - name: Fix permissions on VPS
+      - name: 🔐 Настройка прав доступа
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            echo "🔧 Установка владельца и прав на dist/"
+            echo "🔧 Устанавливаем владельца и права"
             sudo chown -R www-data:www-data /home/deploy/apps/fastyshop-client/dist
             sudo chmod -R 755 /home/deploy/apps/fastyshop-client/dist

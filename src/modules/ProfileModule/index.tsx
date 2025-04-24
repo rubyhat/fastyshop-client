@@ -1,1 +1,1 @@
-export * from "./ProfileModule";
+export { ProfileModule } from "./ProfileModule";

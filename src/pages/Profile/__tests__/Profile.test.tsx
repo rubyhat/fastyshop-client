@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { Profile } from "../Profile";
 
-describe("Page Home", () => {
+describe("Page Profile", () => {
   it("renders the Profile page", () => {
     render(<Profile />);
 

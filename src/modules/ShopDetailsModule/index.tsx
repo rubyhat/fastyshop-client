@@ -1,0 +1,1 @@
+export { ShopDetailsModule } from "./ShopDetailsModule";

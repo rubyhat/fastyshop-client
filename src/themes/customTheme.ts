@@ -203,10 +203,10 @@ export const customTheme = createTheme(
       },
 
       customColors: {
-        colorsWhite: "#f6f6f6",
+        colorsWhite: "#fff",
         colorsWhiteDark: "#EDEDED",
         colorsGrey: "#848484",
-        colorsGreyLight: "#7A808B",
+        colorsGreyLight: "hsla(240, 6%, 25%, 0.18)",
         colorsGreyDark: "#454C58",
         colorsBlue: "#031930",
 

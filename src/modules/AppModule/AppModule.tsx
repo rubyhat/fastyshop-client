@@ -15,6 +15,7 @@ import { ToasterProvider } from "../../providers";
 import { customTheme } from "../../themes/customTheme";
 import { AuthProvider } from "../../providers/AuthProvider";
 import { loadingWrapperStyles } from "./styles";
+import { BottomNavigationMenu } from "../../shared/components/Mobile/BottomNavigationMenu";
 
 const client = new QueryClient();
 
@@ -48,6 +49,7 @@ export const AppModule = () => {
                   <React.Suspense>
                     <RouteList />
                   </React.Suspense>
+                  <BottomNavigationMenu />
                 </Box>
                 <Footer />
               </Box>

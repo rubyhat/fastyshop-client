@@ -4,4 +4,5 @@ export const basicPageHeaderStyles = {
   borderBottom: "1px solid",
   borderColor: "customColors.colorsGreyLight",
   textAlign: "center",
+  backgroundColor: "customColors.colorsWhite",
 };

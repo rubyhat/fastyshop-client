@@ -20,6 +20,10 @@ export default defineConfig({
       brotliSize: true,
     }),
   ],
+  server: {
+    port: 7777,
+    open: true,
+  },
   build: {
     sourcemap: true,
     rollupOptions: {

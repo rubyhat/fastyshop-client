@@ -9,7 +9,7 @@ import { z } from "zod";
  */
 export const LoginFormValidationSchema = z.object({
   /** Логин пользователя (обязательное поле) */
-  username: z.string().min(1, { message: "Введите логин" }),
+  phone: z.string().min(1, { message: "Введите сотовый номер" }),
 
   /** Пароль пользователя (обязательное поле) */
   password: z.string().min(1, { message: "Введите пароль" }),

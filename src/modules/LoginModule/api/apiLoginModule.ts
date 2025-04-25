@@ -14,7 +14,7 @@ export const apiLoginModule = {
    */
   postLogin(data: LoginRequestData): Promise<LoginResponseData> {
     return axiosBaseWrap
-      .post<LoginResponseData>("/auth/token/basic", data)
+      .post<LoginResponseData>("/auth/login", data)
       .then((response) => response.data)
       .catch((error) => {
         throw error;

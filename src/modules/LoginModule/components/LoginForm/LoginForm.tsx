@@ -1,6 +1,3 @@
-import React from "react";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,9 +7,8 @@ import {
   LoginFormValidationSchema,
 } from "../../validations";
 import { loginFormStyles } from "./styles";
-import { apiLoginModule } from "../../api/apiLoginModule";
-import { useLoginStore } from "../../store";
 import { BasicTextField } from "../../../../shared/components/BasicTextField";
+import { useLoginMutation } from "../../hooks";
 
 /**
  * Форма входа в систему.
@@ -25,46 +21,21 @@ import { BasicTextField } from "../../../../shared/components/BasicTextField";
  * @returns React-компонент формы входа
  */
 export const LoginForm = () => {
-  const navigate = useNavigate();
-  const setAccessToken = useLoginStore((state) => state.setAccessToken);
-  const lastVisitedUrl = useLoginStore((state) => state.lastVisitedUrl);
-  const setLastVisitedUrl = useLoginStore((state) => state.setLastVisitedUrl);
-  const [isLoading, setIsLoading] = React.useState(false);
-
   const methods = useForm<LoginFormDataTypes>({
     resolver: zodResolver(LoginFormValidationSchema),
-    defaultValues: { username: "", password: "" },
+    defaultValues: { phone: "", password: "" },
   });
 
   const { handleSubmit } = methods;
+  const loginMutation = useLoginMutation();
 
   /**
    * Обрабатывает отправку формы входа.
    *
-   * - Отправляет данные на сервер для авторизации.
-   * - Сохраняет токены в Zustand-хранилище.
-   * - Перенаправляет пользователя на последнюю посещённую страницу.
-   *
-   * @param {LoginFormDataTypes} data Данные формы (логин и пароль)
+   * @param {LoginFormDataTypes} data Данные формы (логин и пароль).
    */
-  const handleFormSubmit = async (data: LoginFormDataTypes) => {
-    setIsLoading(true);
-    try {
-      // todo: вынести в кастомный хук мутации react-query
-      const response = await apiLoginModule.postLogin(data);
-
-      setAccessToken(response.data.access_token, response.data.refresh_token);
-      toast.success("Успешный вход в систему!");
-
-      navigate(lastVisitedUrl || "/");
-      setLastVisitedUrl(null);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error("Ошибка авторизации:", error);
-      toast.error("Ошибка входа. Проверьте логин и пароль.");
-    } finally {
-      setIsLoading(false);
-    }
+  const handleFormSubmit = (data: LoginFormDataTypes) => {
+    loginMutation.mutate(data);
   };
 
   return (
@@ -78,17 +49,17 @@ export const LoginForm = () => {
           Аутентификация
         </Typography>
         <BasicTextField<LoginFormDataTypes>
-          name="username"
+          name="phone"
           label="Логин"
           placeholder="Введите логин"
-          disabled={isLoading}
+          disabled={loginMutation.isPending}
         />
         <BasicTextField<LoginFormDataTypes>
           name="password"
           label="Пароль"
           placeholder="Введите пароль"
           type="password"
-          disabled={isLoading}
+          disabled={loginMutation.isPending}
         />
         <Box>
           <Button
@@ -97,9 +68,13 @@ export const LoginForm = () => {
             color="primary"
             size="large"
             fullWidth
-            disabled={isLoading}
+            disabled={loginMutation.isPending}
           >
-            {isLoading ? <CircularProgress size={28} /> : "Войти в систему"}
+            {loginMutation.isPending ? (
+              <CircularProgress size={28} />
+            ) : (
+              "Войти в систему"
+            )}
           </Button>
         </Box>
       </Box>

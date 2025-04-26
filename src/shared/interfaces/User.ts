@@ -1,25 +1,30 @@
 /**
  * Перечисление ролей пользователей
- * @enum {string} USER - Пользователь
- * @enum {string} ADMIN - Админ
- * @enum {string} DISPATCHER - Диспетчер
+ * @enum {string} user - Пользователь
+ * @enum {string} seller - Продавец
+ * @enum {string} superadmin - Админ
+ * @enum {string} supermanager - Менеджер
+ - Диспетчер
  */
 export enum UserRole {
-  USER = "USER",
-  ADMIN = "ADMIN",
-  DISPATCHER = "DISPATCHER",
+  user = "user",
+  seller = "seller",
+  superadmin = "superadmin",
+  supermanager = "supermanager",
 }
 
 /**
  * Отображаемый текст для ролей пользователей
- * @enum {string} USER - Пользователь
- * @enum {string} ADMIN - Админ
- * @enum {string} DISPATCHER - Диспетчер
+ * @enum {string} user - Пользователь
+ * @enum {string} seller - Продавец
+ * @enum {string} superadmin - Админ
+ * @enum {string} supermanager - Менеджер
  */
 export enum UserRoleDisplayText {
-  USER = "Пользователь",
-  ADMIN = "Админ",
-  DISPATCHER = "Диспетчер",
+  user = "Пользователь",
+  seller = "Продавец",
+  superadmin = "Админ",
+  supermanager = "Менеджер",
 }
 
 /**

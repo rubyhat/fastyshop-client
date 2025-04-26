@@ -31,7 +31,7 @@ interface DecodedToken {
   exp: number;
 
   /** Роль пользователя в системе */
-  role_name: UserRole;
+  role: UserRole;
 
   /** Логин пользователя */
   username: string;

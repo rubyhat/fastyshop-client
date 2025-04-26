@@ -41,7 +41,7 @@ export const useLoginMutation = () => {
      * @param response Ответ с токенами доступа.
      */
     onSuccess: (response) => {
-      setAccessToken(response.data.access_token, response.data.refresh_token);
+      setAccessToken(response.access_token, response.refresh_token);
       toast.success("Успешный вход в систему!");
       navigate(lastVisitedUrl || "/");
       setLastVisitedUrl(null);

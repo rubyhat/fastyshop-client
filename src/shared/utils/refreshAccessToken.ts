@@ -15,9 +15,10 @@ export const refreshAccessToken = async (): Promise<string | null> => {
       throw new Error("Отсутствует refresh_token, требуется повторный вход.");
     }
 
-    const { data } = await apiLoginModule.patchLoginRefresh(refreshToken);
-    useLoginStore.setState({ accessToken: data.access_token });
-    return data.access_token;
+    const { access_token } =
+      await apiLoginModule.patchLoginRefresh(refreshToken);
+    useLoginStore.setState({ accessToken: access_token });
+    return access_token;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error("Ошибка обновления токена:", error);

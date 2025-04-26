@@ -19,20 +19,6 @@ export interface LoginRefreshRequestData {
  * Ответ API при успешной аутентификации или обновлении токенов.
  */
 export interface LoginResponseData {
-  /** Код ответа API */
-  api_code: string;
-
-  /** Сообщение ответа API */
-  api_message: string;
-
-  /** Объект с токенами доступа */
-  data: AuthTokens;
-}
-
-/**
- * Объект с токенами доступа и обновления.
- */
-export interface AuthTokens {
   /** Токен доступа (используется для авторизации API-запросов) */
   access_token: string;
 

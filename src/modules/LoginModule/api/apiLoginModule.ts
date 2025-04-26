@@ -30,9 +30,9 @@ export const apiLoginModule = {
    */
   patchLoginRefresh(refreshToken: string): Promise<LoginResponseData> {
     return axiosBaseWrap
-      .patch(
-        "/auth/token/refresh",
-        {},
+      .post(
+        "/auth/refresh",
+        { refresh_token: refreshToken },
         {
           headers: {
             "Content-Type": "application/json",

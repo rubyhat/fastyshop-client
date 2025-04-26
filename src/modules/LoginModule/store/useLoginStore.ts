@@ -69,8 +69,9 @@ export const useLoginStore = create<LoginStore>((set) => ({
     /** Сохраняем данные о пользователе в стейт */
     if (accessToken) {
       const decoded = decodeToken(accessToken);
+      console.log("decoded access token", decoded); // todo: temp log
       if (decoded) {
-        set({ username: decoded.username, role: decoded.role_name });
+        set({ username: decoded.username, role: decoded.role });
       }
     }
   },

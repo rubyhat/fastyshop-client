@@ -1,0 +1,1 @@
+export { ProfileShops } from "./ProfileShops";

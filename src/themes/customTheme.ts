@@ -85,19 +85,19 @@ export const customTheme = createTheme(
             padding: "4px 16px",
             fontSize: "14px",
             textTransform: "none",
-            borderRadius: 20,
+            borderRadius: 8,
           },
           sizeMedium: {
             padding: "8px 16px",
             fontSize: "15px",
             textTransform: "none",
-            borderRadius: 20,
+            borderRadius: 8,
           },
           sizeLarge: {
             padding: "12px 16px",
             fontSize: "16px",
             textTransform: "none",
-            borderRadius: 20,
+            borderRadius: 8,
           },
         },
       },
@@ -193,7 +193,7 @@ export const customTheme = createTheme(
     },
     palette: {
       primary: {
-        main: "#8C52FF",
+        main: "#1c1c1c",
         contrastText: "#fff",
       },
 

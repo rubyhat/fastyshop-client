@@ -15,13 +15,13 @@ export const menuItemStyles = { textAlign: "center", cursor: "pointer" };
 export const menuItemIconStyles = (isActive: boolean) => {
   return {
     transition: "color 333ms ease",
-    color: isActive ? "#000000" : "#cccccc",
+    color: isActive ? "#1c1c1c" : "#cccccc",
   };
 };
 
 export const menuItemTextStyles = (isActive: boolean) => {
   return {
     transition: "color 333ms ease",
-    color: isActive ? "#000000" : "#cccccc",
+    color: isActive ? "#1c1c1c" : "#cccccc",
   };
 };

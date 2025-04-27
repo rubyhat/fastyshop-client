@@ -1,13 +1,64 @@
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { IoArrowBackSharp } from "react-icons/io5";
+
 import { basicPageHeaderStyles } from "./styles";
 
+/**
+ * Пропсы для компонента BasicPageHeader.
+ */
 interface BasicPageHeaderProps {
+  /** Заголовок страницы */
   title: string;
+  /** Нужно ли отображать кнопку назад */
+  shownBackArrowButton?: boolean;
+  /** Ссылка fallback, если история недоступна или переход на внешний сайт */
+  backButtonLink?: string;
 }
 
-export const BasicPageHeader = ({ title }: BasicPageHeaderProps) => {
+/**
+ * Компонент заголовка страницы.
+ *
+ * - Отображает заголовок.
+ * - Опционально отображает кнопку "Назад" слева.
+ * - Если пользователь переходит на внешний сайт, используется `backButtonLink` или редирект на главную.
+ *
+ * @param {BasicPageHeaderProps} props Пропсы компонента
+ * @returns React-компонент заголовка страницы
+ */
+export const BasicPageHeader = ({
+  title,
+  shownBackArrowButton = false,
+  backButtonLink,
+}: BasicPageHeaderProps) => {
+  const navigate = useNavigate();
+
+  /**
+   * Обработчик клика по кнопке назад.
+   */
+  const handleBackClick = () => {
+    if (
+      document.referrer &&
+      window.location.hostname === new URL(document.referrer).hostname
+    ) {
+      // Если пользователь пришёл с той же самой страницы нашего сайта
+      navigate(-1);
+    } else if (backButtonLink) {
+      // Если есть переданный fallback
+      navigate(backButtonLink);
+    } else {
+      // Иначе возвращаем на главную
+      navigate("/");
+    }
+  };
+
   return (
     <Box sx={basicPageHeaderStyles}>
+      {shownBackArrowButton && (
+        <IconButton onClick={handleBackClick} sx={{ mr: 1 }}>
+          <IoArrowBackSharp size={16} color="#1c1c1c" />
+        </IconButton>
+      )}
       <Typography component="h6" variant="h6">
         {title}
       </Typography>

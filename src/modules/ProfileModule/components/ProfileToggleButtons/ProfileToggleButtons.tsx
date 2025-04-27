@@ -1,6 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useProfileStore } from "../../store";
 
+// todo: deprecated?
 export const ProfileToggleButtons = () => {
   const profileViewMode = useProfileStore((state) => state.profileViewMode);
   const setProfileViewMode = useProfileStore(

@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FaUser, FaHome, FaSearch, FaShoppingBasket } from "react-icons/fa";
+import { FaUserAlt, FaHome, FaSearch, FaShoppingBasket } from "react-icons/fa";
 
 import {
   bottomNavigationMenuStyles,
@@ -64,7 +64,7 @@ export const BottomNavigationMenu = () => {
       </Box>
 
       <Box sx={menuItemStyles} onClick={() => navigate("/profile")}>
-        <FaUser size={16} style={menuItemIconStyles(isActive("/profile"))} />
+        <FaUserAlt size={16} style={menuItemIconStyles(isActive("/profile"))} />
         <Typography
           component="p"
           variant="body1"

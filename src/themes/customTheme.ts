@@ -210,7 +210,7 @@ export const customTheme = createTheme(
         colorsGreyDark: "#454C58",
         colorsBlue: "#031930",
 
-        colorsAccent: "#D1BAFF",
+        colorsAccent: "#1c1c1c",
         colorsAccentActive: "#AA80FF",
         colorsAccentHover: "#9561FF",
 

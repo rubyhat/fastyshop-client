@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 
 import { ProfileInfoCard } from "./components/ProfileInfoCard";
 import { ProfileNavigateMenu } from "./components/ProfileNavigateMenu";
 import { ProfileFavoritesLinks } from "./components/ProfileFavoritesLinks";
+import { version } from "../../../package.json";
 
 import { BasicPageHeader } from "../../shared/components/Mobile/BasicPageHeader";
 
@@ -20,8 +21,11 @@ export const ProfileModule = () => {
             <Box sx={{ pb: 2, width: 1 }}>
               <ProfileFavoritesLinks />
             </Box>
-            <Box sx={{ pb: 2, width: 1 }}>
+            <Box sx={{ width: 1 }}>
               <ProfileNavigateMenu />
+              <Typography component="p" variant="body2" mt={1} color="#aaa">
+                Версия платформы: {version}
+              </Typography>
             </Box>
           </Grid>
           <Grid size={12}></Grid>

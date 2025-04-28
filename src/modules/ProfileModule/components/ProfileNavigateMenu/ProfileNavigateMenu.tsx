@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import { Box, Paper, Typography } from "@mui/material";
+
 import { FaInfo } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa6";
 import { FaPowerOff } from "react-icons/fa";
@@ -11,7 +13,6 @@ import {
   profileNavigateMenuIconStyles,
   profileNavigateMenuTextWrapperStyles,
 } from "./styles";
-import { useNavigate } from "react-router-dom";
 
 export const ProfileNavigateMenu = () => {
   const navigate = useNavigate();

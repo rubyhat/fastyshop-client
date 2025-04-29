@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useCheckToken } from "../modules/AppModule/hooks";
+import { useCheckToken, useSyncCurrentUser } from "../modules/AppModule/hooks";
 
 /**
  * Пропсы для компонента `AuthProvider`.
@@ -15,16 +15,19 @@ interface AuthProviderProps {
 }
 
 /**
- * Компонент-провайдер для проверки токена аутентификации.
+ * Компонент-провайдер для проверки токена аутентификации и синхронизации данных пользователя.
  *
  * Использует `useCheckToken()` для проверки актуальности токена и
  * вызывает `setIsLoading`, чтобы обновить состояние загрузки.
+ *
+ * * - Синхронизирует данные пользователя через `useSyncCurrentUser()`
  *
  * @param {AuthProviderProps} props Пропсы компонента
  * @returns `null`, так как этот провайдер не рендерит JSX
  */
 export const AuthProvider = ({ setIsLoading }: AuthProviderProps) => {
   const { isLoading } = useCheckToken();
+  useSyncCurrentUser();
 
   React.useEffect(() => setIsLoading(isLoading), [isLoading, setIsLoading]);
 

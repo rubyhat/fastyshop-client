@@ -82,13 +82,19 @@ axiosBaseWrap.interceptors.response.use(
           isRefreshing = false;
 
           if (newToken) {
-            refreshSubscribers.forEach((callback) => callback(newToken));
+            refreshSubscribers.forEach((callback) =>
+              callback(newToken.access_token),
+            );
             refreshSubscribers = [];
+            useLoginStore
+              .getState()
+              .setAccessToken(newToken.access_token, newToken.refresh_token);
             return axiosBaseWrap(originalRequest);
           }
         } catch (err) {
           isRefreshing = false;
           refreshSubscribers = [];
+          useLoginStore.getState().logout();
           return Promise.reject(err);
         }
       }

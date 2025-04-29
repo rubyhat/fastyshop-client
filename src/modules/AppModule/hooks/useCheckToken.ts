@@ -19,13 +19,18 @@ import {
  *
  * @returns Объект с текущим статусом загрузки `{ isLoading: boolean }`
  */
+
+/* TODO: Решить нужно ли это.
+ * Этот код нужен, чтобы сразу проверять наличие токенов и отправлять запрос на обновление при необходимости
+ * Однако этот код конфликтует с обновлением токенов в axiosBaseWrap.interceptors.response  в axiosConfig
+ */
 export const useCheckToken = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const accessToken = useLoginStore((state) => state.accessToken);
   const setAccessToken = useLoginStore((state) => state.setAccessToken);
   const setLastVisitedUrl = useLoginStore((state) => state.setLastVisitedUrl);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false); // TODO: set default true if will use this code
 
   React.useEffect(() => {
     /**
@@ -37,7 +42,7 @@ export const useCheckToken = () => {
       try {
         const token = await refreshAccessToken();
         if (token) {
-          setAccessToken(token);
+          setAccessToken(token.access_token, token.refresh_token);
           const redirectPaths = ["/login", "/no-auth", "/access-denied"];
           if (redirectPaths.includes(location.pathname)) {
             navigate("/");
@@ -58,6 +63,7 @@ export const useCheckToken = () => {
      * Проверяет, истёк ли токен, и предпринимает соответствующие действия.
      */
     const checkToken = async () => {
+      return; // TODO: check TODO desc in top side of file
       if (accessToken) {
         const isExpired = isTokenExpired(accessToken);
         if (isExpired) {

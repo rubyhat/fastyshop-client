@@ -1,5 +1,6 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { RequirePermission } from "../shared/permissions/guards/RequirePermission/RequirePermission";
 
 const Home = React.lazy(() => import("../pages/Home"));
 const Login = React.lazy(() => import("../pages/Login"));
@@ -10,28 +11,29 @@ const Orders = React.lazy(() => import("../pages/Orders"));
 
 const AccessDenied = React.lazy(() => import("../pages/System/AccessDenied"));
 const PageNotFound = React.lazy(() => import("../pages/System/PageNotFound"));
-const ProtectedRoute = React.lazy(() => import("./ProtectedRoute"));
 
 export const RouteList = () => {
-  const isAuth = true;
-
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/profile" element={<Profile />} />
       <Route path="/shop/:id" element={<ShopDetails />} />
 
       <Route path="/orders" element={<Orders />} />
 
       <Route
-        path="/access-denied"
+        path="/profile"
         element={
-          <ProtectedRoute isAuth={isAuth}>
-            <AccessDenied />
-          </ProtectedRoute>
+          <RequirePermission
+            permission="viewProfile"
+            fallback={<Navigate to="/access-denied" replace />}
+          >
+            <Profile />
+          </RequirePermission>
         }
       />
+
+      <Route path="/access-denied" element={<AccessDenied />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

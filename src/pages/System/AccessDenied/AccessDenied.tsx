@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import { Box, Container, Typography } from "@mui/material";
+import { useIsAuthenticated } from "../../../shared/permissions/hooks";
 
 export const AccessDenied = () => {
+  const isAuthenticated = useIsAuthenticated();
   return (
     <Box component="section" className="section" data-testid="pageAccessDenied">
       <Container>
@@ -41,6 +43,23 @@ export const AccessDenied = () => {
                   Вернуться на главную
                 </Typography>
               </Link>
+              {!isAuthenticated && (
+                <>
+                  <Typography component="p" variant="body1" color="primary">
+                    или
+                  </Typography>
+                  <Link to="/login">
+                    <Typography
+                      component="p"
+                      variant="body1"
+                      color="primary"
+                      sx={{ textDecoration: "underline" }}
+                    >
+                      Войти в аккаунт
+                    </Typography>
+                  </Link>
+                </>
+              )}
             </Box>
           </Grid>
         </Grid>

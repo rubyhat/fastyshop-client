@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import Cookies from "js-cookie";
-import { UserRole } from "../../../shared/interfaces";
 import { decodeToken } from "../../../shared/utils";
+import { useUserStore } from "../../UserModule/store";
 
 /**
  * Интерфейс хранилища состояния аутентификации.
@@ -31,12 +31,6 @@ interface LoginStore {
    * Выполняет выход из системы: удаляет токены и сбрасывает состояние.
    */
   logout: () => void;
-
-  /** Логин пользователя в системе */
-  username: string | null;
-
-  /** Роль пользователя в системе */
-  role: UserRole | null;
 }
 
 /** Время жизни refresh-токена в cookies (в днях) */
@@ -51,8 +45,6 @@ const TOKEN_LIFE_TIME = 1;
 export const useLoginStore = create<LoginStore>((set) => ({
   accessToken: null,
   lastVisitedUrl: null,
-  username: null,
-  role: null,
 
   setAccessToken: (accessToken, refreshToken) => {
     set({ accessToken });
@@ -69,9 +61,12 @@ export const useLoginStore = create<LoginStore>((set) => ({
     /** Сохраняем данные о пользователе в стейт */
     if (accessToken) {
       const decoded = decodeToken(accessToken);
-      console.log("decoded access token", decoded); // todo: temp log
+      // console.log("decoded access token", decoded); // todo: temp log
+
       if (decoded) {
-        set({ username: decoded.username, role: decoded.role });
+        useUserStore
+          .getState()
+          .setUserFromToken({ role: decoded.role, phone: decoded.phone });
       }
     }
   },
@@ -83,5 +78,6 @@ export const useLoginStore = create<LoginStore>((set) => ({
   logout: () => {
     set({ accessToken: null, lastVisitedUrl: null });
     Cookies.remove("refresh_token");
+    useUserStore.getState().clearUser();
   },
 }));

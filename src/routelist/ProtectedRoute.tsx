@@ -7,6 +7,7 @@ interface Props {
   hasAccess?: boolean;
 }
 
+// TODO: deprecated, delete after tests
 const ProtectedRoute = ({ isAuth, hasAccess = true, children }: Props) => {
   if (!isAuth) {
     return <Navigate to="/no-auth" replace />;

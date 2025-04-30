@@ -37,18 +37,15 @@ export const BasicPageHeader = ({
    * Обработчик клика по кнопке назад.
    */
   const handleBackClick = () => {
-    if (
-      document.referrer &&
-      window.location.hostname === new URL(document.referrer).hostname
-    ) {
-      // Если пользователь пришёл с той же самой страницы нашего сайта
-      navigate(-1);
-    } else if (backButtonLink) {
+    if (backButtonLink) {
       // Если есть переданный fallback
       navigate(backButtonLink);
+    } else if (window.history.length > 1) {
+      // Если в истории есть ссылки, то вернуться назад
+      return navigate(-1);
     } else {
       // Иначе возвращаем на главную
-      navigate("/");
+      return navigate("/");
     }
   };
 

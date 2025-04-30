@@ -23,7 +23,11 @@ export const ProfileDetailsModule = () => {
 
   return (
     <React.Fragment>
-      <BasicPageHeader title="Детали профиля" />
+      <BasicPageHeader
+        title="Детали профиля"
+        shownBackArrowButton
+        backButtonLink="/profile"
+      />
       <Container maxWidth={false}>
         <Grid container spacing={2}>
           <Grid size={12}>

@@ -1,9 +1,14 @@
 export enum CountryCode {
-  kz = "kz",
-  ru = "ru",
+  KZ = "KZ",
+  RU = "RU",
 }
 
 export enum CountryCodeDisplayText {
-  kz = "Казахстан",
-  ru = "Россия",
+  KZ = "Казахстан",
+  RU = "Россия",
+}
+
+export enum CountryCodeDisplayFlag {
+  KZ = "🇰🇿",
+  RU = "🇷🇺",
 }

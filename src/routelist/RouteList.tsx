@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { RequirePermission } from "../shared/permissions/guards/RequirePermission/RequirePermission";
 
 const Home = React.lazy(() => import("../pages/Home"));
@@ -29,7 +29,7 @@ export const RouteList = () => {
         element={
           <RequirePermission
             permission="viewProfile"
-            fallback={<Navigate to="/access-denied" replace />}
+            // fallback={<Navigate to="/access-denied" replace />}
           >
             <Profile />
           </RequirePermission>
@@ -40,7 +40,7 @@ export const RouteList = () => {
         element={
           <RequirePermission
             permission="viewProfileDetails"
-            fallback={<Navigate to="/access-denied" replace />}
+            // fallback={<Navigate to="/access-denied" replace />}
           >
             <ProfileDetails />
           </RequirePermission>

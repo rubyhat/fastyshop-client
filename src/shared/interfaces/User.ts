@@ -8,4 +8,7 @@ export interface User {
   country_code: CountryCode;
   is_active: boolean;
   email: string;
+  first_name: string | null;
+  last_name: string | null;
+  middle_name: string | null;
 }

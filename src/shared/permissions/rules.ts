@@ -17,4 +17,5 @@ export const accessRules = {
   manageUsers: [UserRole.superadmin],
   createStore: [UserRole.seller],
   viewProfile: allRoles,
+  viewProfileDetails: allRoles,
 };

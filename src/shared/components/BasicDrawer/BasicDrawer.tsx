@@ -1,7 +1,7 @@
 import { Box, Drawer, IconButton, Typography } from "@mui/material";
 import { MdClose } from "react-icons/md";
 
-import { headerStyles } from "./styles";
+import { contentWrapperStyles, headerStyles } from "./styles";
 
 /**
  * Пропсы для компонента `BasicDrawer`.
@@ -36,7 +36,7 @@ export const BasicDrawer = ({
   children,
   title,
   isOpen,
-  anchor = "left",
+  anchor = "bottom",
   setIsOpen,
 }: BasicDrawerProps) => {
   /**
@@ -49,15 +49,14 @@ export const BasicDrawer = ({
   };
 
   return (
-    <Drawer open={isOpen} onClose={toggleDrawer(false)} anchor={anchor}>
-      <Box
-        sx={{
-          minWidth: 400,
-          height: 1,
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
+    <Drawer
+      open={isOpen}
+      onClose={toggleDrawer(false)}
+      anchor={anchor}
+      slotProps={{ paper: { sx: { borderRadius: "8px 8px 0 0" } } }}
+      transitionDuration={333}
+    >
+      <Box sx={contentWrapperStyles}>
         <Box sx={headerStyles}>
           <Typography component="h6" variant="h6">
             {title}
@@ -67,7 +66,7 @@ export const BasicDrawer = ({
             onClick={toggleDrawer(false)}
             size="small"
           >
-            <MdClose />
+            <MdClose color="#1c1c1c" />
           </IconButton>
         </Box>
         <Box sx={{ flexGrow: 1 }}>{children}</Box>

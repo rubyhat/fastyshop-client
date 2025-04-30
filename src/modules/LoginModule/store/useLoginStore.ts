@@ -31,6 +31,10 @@ interface LoginStore {
    * Выполняет выход из системы: удаляет токены и сбрасывает состояние.
    */
   logout: () => void;
+
+  /** Флаг, указывающий, что нужно выполнить выход из учетной записи пользователя */
+  shouldLogout: boolean;
+  markLogoutPending: () => void;
 }
 
 /** Время жизни refresh-токена в cookies (в днях) */
@@ -45,6 +49,7 @@ const TOKEN_LIFE_TIME = 1;
 export const useLoginStore = create<LoginStore>((set) => ({
   accessToken: null,
   lastVisitedUrl: null,
+  shouldLogout: false,
 
   setAccessToken: (accessToken, refreshToken) => {
     set({ accessToken });
@@ -75,8 +80,12 @@ export const useLoginStore = create<LoginStore>((set) => ({
     set({ lastVisitedUrl: url });
   },
 
+  markLogoutPending: () => {
+    set({ shouldLogout: true });
+  },
+
   logout: () => {
-    set({ accessToken: null, lastVisitedUrl: null });
+    set({ accessToken: null, lastVisitedUrl: null, shouldLogout: false });
     Cookies.remove("refresh_token");
     useUserStore.getState().clearUser();
   },

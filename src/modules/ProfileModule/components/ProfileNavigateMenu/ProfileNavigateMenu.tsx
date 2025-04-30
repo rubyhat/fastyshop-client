@@ -3,7 +3,6 @@ import { Box, Paper, Typography } from "@mui/material";
 
 import { FaInfo } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa6";
-import { FaPowerOff } from "react-icons/fa";
 import { HiOutlineDocumentText } from "react-icons/hi";
 
 import {
@@ -16,8 +15,6 @@ import {
 
 export const ProfileNavigateMenu = () => {
   const navigate = useNavigate();
-
-  const handleClickLogoutButton = () => {};
 
   return (
     <Box component={Paper} sx={profileNavigateMenuStyles}>
@@ -56,20 +53,6 @@ export const ProfileNavigateMenu = () => {
             <Box sx={{ ml: "auto", mr: 1 }}>
               <FaAngleRight size={20} />
             </Box>
-          </Box>
-        </Box>
-        <Box
-          component="li"
-          sx={profileNavigateMenuLiItemStyles}
-          onClick={handleClickLogoutButton}
-        >
-          <Box sx={profileNavigateMenuIconStyles}>
-            <FaPowerOff size={12} color="#fff" />
-          </Box>
-          <Box sx={{ ...profileNavigateMenuTextWrapperStyles, border: "none" }}>
-            <Typography component="p" variant="body1" color="error">
-              Выйти из аккаунта
-            </Typography>
           </Box>
         </Box>
       </Box>

@@ -1,15 +1,18 @@
 import { Container, Grid } from "@mui/material";
 import { LoginForm } from "./components/LoginForm";
+import { useLogoutEffect } from "./hooks";
 
 /**
  * Модуль страницы входа в систему.
  *
  * - Центрирует форму входа (`LoginForm`) по горизонтали и вертикали.
- * - Использует `Grid2` для адаптивного расположения формы.
+ * - Использует `Grid` для адаптивного расположения формы.
+ * - Использует `useLogoutEffect` для выхода из учетной записи.
  *
  * @returns React-компонент модуля входа
  */
 export const LoginModule = () => {
+  useLogoutEffect();
   return (
     <Container>
       <Grid container justifyContent="center" alignItems="center">

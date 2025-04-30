@@ -7,17 +7,20 @@ import { BasicNavListToDrawer } from "../../shared/components/BasicNavListToDraw
 import { useProfileDetailsStore } from "./store/useProfileDetailsStore";
 import { BasicNavListToDrawerItem } from "../../shared/components/BasicNavListToDrawer/BasicNavListToDrawer";
 import { ProfileDetailsEditUserDrawer } from "./components/ProfileDetailsEditUserDrawer";
+import { ProfileDetailsLogoutDrawer } from "./components/ProfileDetailsLogoutDrawer";
 
 export const ProfileDetailsModule = () => {
-  const { setShowEditProfileDrawer } = useProfileDetailsStore();
+  const { setShowEditProfileDrawer, setShowLogoutDrawer } =
+    useProfileDetailsStore();
 
   const navList: BasicNavListToDrawerItem[] = [
     { label: "Личные данные", onClick: () => setShowEditProfileDrawer(true) },
     {
       label: "Выйти из аккаунта",
-      onClick: () => setShowEditProfileDrawer(true),
+      onClick: () => setShowLogoutDrawer(true),
     },
   ];
+
   return (
     <React.Fragment>
       <BasicPageHeader title="Детали профиля" />
@@ -32,6 +35,7 @@ export const ProfileDetailsModule = () => {
         </Grid>
       </Container>
       <ProfileDetailsEditUserDrawer />
+      <ProfileDetailsLogoutDrawer />
     </React.Fragment>
   );
 };

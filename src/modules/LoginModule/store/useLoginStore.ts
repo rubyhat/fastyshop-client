@@ -66,13 +66,11 @@ export const useLoginStore = create<LoginStore>((set) => ({
     /** Сохраняем данные о пользователе в стейт */
     if (accessToken) {
       const decoded = decodeToken(accessToken);
-      console.log("decoded access token", decoded); // todo: temp log
 
       if (decoded) {
         useUserStore
           .getState()
           .setUserFromToken({ role: decoded.role, phone: decoded.phone });
-        console.log(decoded);
       }
     }
   },

@@ -19,6 +19,14 @@ interface BasicTextFieldProps<T extends Record<string, unknown>> {
 
   /** Состояние поля */
   disabled?: boolean;
+
+  /** Размер инпута TextField */
+  size?: "small" | "medium";
+
+  /** Подсказка под инпутом */
+  helperText?: React.ReactNode;
+
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 /**
@@ -35,6 +43,9 @@ export const BasicTextField = <T extends Record<string, unknown>>({
   placeholder,
   type,
   disabled,
+  size,
+  helperText,
+  onClick,
 }: BasicTextFieldProps<T>) => {
   const {
     formState: { errors },
@@ -49,10 +60,20 @@ export const BasicTextField = <T extends Record<string, unknown>>({
           label={label}
           type={type}
           sx={{ width: 1 }}
+          slotProps={
+            {
+              // input: { sx: { fontSize: size === "small" ? 14 : 16 } },
+              // htmlInput: { sx: { p: 1.25 } },
+            }
+          }
           placeholder={placeholder}
           error={!!(errors as FieldErrors<T>)[name]}
-          helperText={(errors as FieldErrors<T>)[name]?.message as string}
+          helperText={
+            ((errors as FieldErrors<T>)[name]?.message as string) || helperText
+          }
           disabled={disabled}
+          size={size}
+          onClick={onClick}
         />
       )}
     />

@@ -1,5 +1,6 @@
-import { BasicDrawer } from "../../../../shared/components/BasicDrawer";
 import { useProfileDetailsStore } from "../../store/useProfileDetailsStore";
+import { ProfileDetailsEditUserForm } from "../ProfileDetailsEditUserForm";
+import { BasicDrawer } from "../../../../shared/components/BasicDrawer";
 
 export const ProfileDetailsEditUserDrawer = () => {
   const { showEditProfileDrawer, setShowEditProfileDrawer } =
@@ -10,7 +11,7 @@ export const ProfileDetailsEditUserDrawer = () => {
       isOpen={showEditProfileDrawer}
       setIsOpen={setShowEditProfileDrawer}
     >
-      ProfileDetailsEditUserDrawer
+      <ProfileDetailsEditUserForm />
     </BasicDrawer>
   );
 };

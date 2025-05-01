@@ -7,9 +7,20 @@ import { z } from "zod";
  * - `username` - обязательное поле, строка.
  * - `password` - обязательное поле, строка.
  */
+
+const phoneRegex = /^\+7\d{10}$/;
 export const LoginFormValidationSchema = z.object({
   /** Логин пользователя (обязательное поле) */
-  phone: z.string().min(1, { message: "Введите сотовый номер" }),
+  phone: z
+    .string()
+    .min(12, {
+      message:
+        "Введите корректный номер телефона. Номер должен начинаться с +7.",
+    })
+    .regex(phoneRegex, {
+      message: "Телефон должен начинаться с +7 и содержать 10 цифр",
+    })
+    .max(12, { message: "Слишком длинный номер телефона" }),
 
   /** Пароль пользователя (обязательное поле) */
   password: z.string().min(1, { message: "Введите пароль" }),

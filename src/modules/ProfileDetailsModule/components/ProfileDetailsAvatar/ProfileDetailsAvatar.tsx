@@ -12,6 +12,7 @@ import { CountryCodeDisplayText } from "../../../../shared/interfaces/Country";
 
 export const ProfileDetailsAvatar = () => {
   const profile = useUserProfile();
+  console.log("profile", profile);
   if (profile) {
     return (
       <Box sx={profileDetailsAvatarStyles}>

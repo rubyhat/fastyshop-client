@@ -1,4 +1,10 @@
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -35,47 +41,53 @@ export const LoginForm = () => {
    * @param {LoginFormDataTypes} data Данные формы (логин и пароль).
    */
   const handleFormSubmit = (data: LoginFormDataTypes) => {
-    loginMutation.mutate(data);
+    const normalizedData = {
+      ...data,
+      phone: data.phone.slice(1), // Удаляем +
+    };
+    loginMutation.mutate(normalizedData);
   };
 
   return (
     <FormProvider {...methods}>
-      <Box
-        component="form"
-        onSubmit={handleSubmit(handleFormSubmit)}
-        sx={loginFormStyles}
-      >
-        <Typography component="h1" variant="h4">
-          Аутентификация
-        </Typography>
-        <BasicTextField<LoginFormDataTypes>
-          name="phone"
-          label="Логин"
-          placeholder="Введите логин"
-          disabled={loginMutation.isPending}
-        />
-        <BasicTextField<LoginFormDataTypes>
-          name="password"
-          label="Пароль"
-          placeholder="Введите пароль"
-          type="password"
-          disabled={loginMutation.isPending}
-        />
-        <Box>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            size="large"
-            fullWidth
+      <Box component={Paper}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit(handleFormSubmit)}
+          sx={loginFormStyles}
+        >
+          <Typography component="h1" variant="h4">
+            Добро пожаловать!
+          </Typography>
+          <BasicTextField<LoginFormDataTypes>
+            name="phone"
+            label="Телефон"
+            placeholder="Введите логин"
             disabled={loginMutation.isPending}
-          >
-            {loginMutation.isPending ? (
-              <CircularProgress size={28} />
-            ) : (
-              "Войти в систему"
-            )}
-          </Button>
+          />
+          <BasicTextField<LoginFormDataTypes>
+            name="password"
+            label="Пароль"
+            placeholder="Введите пароль"
+            type="password"
+            disabled={loginMutation.isPending}
+          />
+          <Box>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              size="large"
+              fullWidth
+              disabled={loginMutation.isPending}
+            >
+              {loginMutation.isPending ? (
+                <CircularProgress size={28} />
+              ) : (
+                "Войти в систему"
+              )}
+            </Button>
+          </Box>
         </Box>
       </Box>
     </FormProvider>

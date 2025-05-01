@@ -13,7 +13,9 @@ interface UserStore {
   setUserProfile: (user: User) => void;
 
   /** Устанавливает данные из access_token (например: phone, role) */
-  setUserFromToken: (data: Partial<Pick<User, "phone" | "role">>) => void;
+  setUserFromToken: (
+    data: Partial<Pick<User, "phone" | "role" | "first_name">>,
+  ) => void;
 
   /** Очищает профиль пользователя */
   clearUser: () => void;
@@ -37,6 +39,7 @@ export const useUserStore = create<UserStore>((set) => ({
         ...state.profile,
         phone: data.phone ?? state.profile?.phone ?? "",
         role: data.role ?? state.profile?.role ?? "user",
+        first_name: data.first_name ?? state.profile?.first_name ?? "-",
       } as User,
     }));
   },

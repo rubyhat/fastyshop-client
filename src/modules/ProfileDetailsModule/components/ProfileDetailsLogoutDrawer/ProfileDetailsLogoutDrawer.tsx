@@ -12,6 +12,7 @@ export const ProfileDetailsLogoutDrawer = () => {
 
   const handleLogoutButtonClick = () => {
     markLogoutPending();
+    setShowLogoutDrawer(false);
     navigate("/login");
   };
 
@@ -21,10 +22,12 @@ export const ProfileDetailsLogoutDrawer = () => {
       isOpen={showLogoutDrawer}
       setIsOpen={setShowLogoutDrawer}
     >
-      <Box sx={{ p: 2 }}>
-        <Typography component="p" variant="body1" mb={2}>
-          Вы уверены, что хотите выйти из текущего аккаунта?
-        </Typography>
+      <Box sx={{ p: 2, display: "flex", flexDirection: "column", height: 1 }}>
+        <Box flexGrow={1}>
+          <Typography component="p" variant="body1" mb={2}>
+            Вы уверены, что хотите выйти из текущего аккаунта?
+          </Typography>
+        </Box>
         <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
           <Button
             variant="contained"

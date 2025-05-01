@@ -14,7 +14,7 @@ import { useLogoutEffect } from "./hooks";
 export const LoginModule = () => {
   useLogoutEffect();
   return (
-    <Container>
+    <Container maxWidth={false}>
       <Grid container justifyContent="center" alignItems="center">
         <Grid size={{ xs: 12, md: 6 }} py={10}>
           <LoginForm />

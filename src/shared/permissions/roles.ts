@@ -26,6 +26,13 @@ export enum UserRoleDisplayText {
   supermanager = "Менеджер",
 }
 
+/**
+ * Отображаемый цвет для ролей пользователей
+ * @enum {string} user - default
+ * @enum {string} seller - info
+ * @enum {string} superadmin - error
+ * @enum {string} supermanager - warning
+ */
 export enum UserRoleColor {
   user = "default",
   seller = "info",

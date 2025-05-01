@@ -27,12 +27,12 @@ export const RouteList = () => {
       <Route
         path="/profile"
         element={
-          <RequirePermission
-            permission="viewProfile"
-            // fallback={<Navigate to="/access-denied" replace />}
-          >
-            <Profile />
-          </RequirePermission>
+          // <RequirePermission
+          //   permission="viewProfile"
+          //   fallback={<Navigate to="/access-denied" replace />}
+          // >
+          <Profile />
+          // </RequirePermission>
         }
       />
       <Route

@@ -1,6 +1,7 @@
 import { Container, Grid } from "@mui/material";
 import { LoginForm } from "./components/LoginForm";
 import { useLogoutEffect } from "./hooks";
+import { RegistrationModule } from "../RegistrationModule";
 
 /**
  * Модуль страницы входа в систему.
@@ -18,6 +19,7 @@ export const LoginModule = () => {
       <Grid container justifyContent="center" alignItems="center">
         <Grid size={{ xs: 12, md: 6 }} py={10}>
           <LoginForm />
+          <RegistrationModule />
         </Grid>
       </Grid>
     </Container>

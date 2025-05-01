@@ -15,6 +15,7 @@ import {
 import { loginFormStyles } from "./styles";
 import { BasicTextField } from "../../../../shared/components/BasicTextField";
 import { useLoginMutation } from "../../hooks";
+import { useRegistrationStore } from "../../../RegistrationModule/store/useRegistrationStore";
 
 /**
  * Форма входа в систему.
@@ -27,6 +28,10 @@ import { useLoginMutation } from "../../hooks";
  * @returns React-компонент формы входа
  */
 export const LoginForm = () => {
+  const setShowRegistrationDrawer = useRegistrationStore(
+    (state) => state.setShowRegistrationDrawer,
+  );
+
   const methods = useForm<LoginFormDataTypes>({
     resolver: zodResolver(LoginFormValidationSchema),
     defaultValues: { phone: "", password: "" },
@@ -86,6 +91,19 @@ export const LoginForm = () => {
               ) : (
                 "Войти в систему"
               )}
+            </Button>
+            <Typography component="p" variant="body2" my={2} textAlign="center">
+              или
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              fullWidth
+              disabled={loginMutation.isPending}
+              onClick={() => setShowRegistrationDrawer(true)}
+            >
+              Создать аккаунт
             </Button>
           </Box>
         </Box>

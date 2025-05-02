@@ -12,6 +12,7 @@ import { BasicFormSelectField } from "../../../../shared/components/BasicFormSel
 import { countrySelectOptions } from "../../../../shared/constants";
 import { CountryCode } from "../../../../shared/interfaces/Country";
 import { usePostNewUserMutation } from "../../hooks";
+import { PasswordRulesHint } from "../../../../shared/components/PasswordRulesHint";
 
 export const RegistrationForm = () => {
   const setShowRegistrationDrawer = useRegistrationStore(
@@ -27,13 +28,16 @@ export const RegistrationForm = () => {
     },
   });
 
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit, reset, watch, formState } = methods;
+  const password = watch("password");
+  const passwordStarted = formState.dirtyFields.password;
+
   const postNewUserMutation = usePostNewUserMutation();
 
   const onSubmit = (data: RegistrationFormData) => {
     devLogger.log(data);
     setShowRegistrationDrawer(false);
-    postNewUserMutation.mutate(data);
+    // postNewUserMutation.mutate(data);
   };
 
   const handleResetForm = () => {
@@ -88,6 +92,10 @@ export const RegistrationForm = () => {
               placeholder="Введите пароль"
               type="password"
               disabled={postNewUserMutation.isPending}
+            />
+            <PasswordRulesHint
+              password={password}
+              touched={!!passwordStarted}
             />
           </Box>
           <Box pb={1}>

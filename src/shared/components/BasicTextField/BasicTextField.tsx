@@ -51,6 +51,8 @@ export const BasicTextField = <T extends Record<string, unknown>>({
     formState: { errors },
   } = useFormContext<T>();
 
+  const fieldError = (errors as FieldErrors<T>)[name];
+
   return (
     <Controller
       name={name}
@@ -67,10 +69,8 @@ export const BasicTextField = <T extends Record<string, unknown>>({
             }
           }
           placeholder={placeholder}
-          error={!!(errors as FieldErrors<T>)[name]}
-          helperText={
-            ((errors as FieldErrors<T>)[name]?.message as string) || helperText
-          }
+          error={!!fieldError?.message}
+          helperText={(fieldError?.message as string) || helperText}
           disabled={disabled}
           size={size}
           onClick={onClick}

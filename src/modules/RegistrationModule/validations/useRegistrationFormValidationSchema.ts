@@ -47,13 +47,39 @@ export const useRegistrationFormValidationSchema = z
 
     password: z
       .string()
-      .min(6, { message: "Пароль должен содержать минимум 6 символов" }),
+      .min(12, { message: "Пароль должен содержать минимум 12 символов" })
+      .regex(/[A-Z]/, {
+        message: "Пароль должен содержать хотя бы одну заглавную букву A-Z",
+      })
+      .regex(/[a-z]/, {
+        message: "Пароль должен содержать хотя бы одну строчную букву a-z",
+      })
+      .regex(/\d/, {
+        message: "Пароль должен содержать хотя бы одну цифру",
+      })
+      .regex(/[!*@#$%^&+=_-]/, {
+        message:
+          "Пароль должен содержать хотя бы один специальный символ (!*@#$%^&+=_-)",
+      }),
 
-    password_confirmation: z.string(),
+    password_confirmation: z
+      .string({
+        required_error: "Подтвердите пароль",
+        invalid_type_error: "Подтвердите пароль",
+      })
+      .min(1, { message: "Подтвердите пароль" }),
   })
-  .refine((data) => data.password === data.password_confirmation, {
-    message: "Пароли не совпадают",
-    path: ["password_confirmation"], // ошибка у второго поля
+  .superRefine((data, ctx) => {
+    if (
+      data.password_confirmation &&
+      data.password !== data.password_confirmation
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Пароли не совпадают",
+        path: ["password_confirmation"],
+      });
+    }
   });
 
 export type RegistrationFormData = z.infer<

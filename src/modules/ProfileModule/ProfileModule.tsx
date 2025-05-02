@@ -26,34 +26,36 @@ export const ProfileModule = () => {
         backButtonLink="/"
       />
       <Container maxWidth={false}>
-        <Grid container spacing={2}>
-          <Grid size={12}>
-            <Box sx={{ py: 2, width: 1 }}>
-              <Box component={Paper} sx={{ py: 4, px: 2 }}>
-                <Typography component="h6" variant="h6">
-                  Упс, Вы не авторизованы ;(
+        {!isAuthenticated && (
+          <Grid container spacing={2}>
+            <Grid size={12}>
+              <Box sx={{ py: 2, width: 1 }}>
+                <Box component={Paper} sx={{ py: 4, px: 2 }}>
+                  <Typography component="h6" variant="h6">
+                    Упс, Вы не авторизованы ;(
+                  </Typography>
+                  <Typography component="p" variant="body1">
+                    Создавайте магазины, продавайте и покупайте товары и услуги!
+                  </Typography>
+                  <Typography component="p" variant="body1" mt={1} mb={2}>
+                    Для этого необходимо войти в систему или создать аккаунт :)
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    onClick={() => navigate("/login")}
+                  >
+                    Войти/Создать аккаунт
+                  </Button>
+                </Box>
+                <Typography component="p" variant="body2" mt={1} color="#aaa">
+                  Версия платформы: {version}
                 </Typography>
-                <Typography component="p" variant="body1">
-                  Создавайте магазины, продавайте и покупайте товары и услуги!
-                </Typography>
-                <Typography component="p" variant="body1" mt={1} mb={2}>
-                  Для этого необходимо войти в систему или создать аккаунт :)
-                </Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                  onClick={() => navigate("/login")}
-                >
-                  Войти/Создать аккаунт
-                </Button>
               </Box>
-              <Typography component="p" variant="body2" mt={1} color="#aaa">
-                Версия платформы: {version}
-              </Typography>
-            </Box>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
         {isAuthenticated && (
           <Grid container spacing={2}>
             <Grid size={12}>

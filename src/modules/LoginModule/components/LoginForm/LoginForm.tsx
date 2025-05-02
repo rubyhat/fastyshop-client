@@ -16,6 +16,7 @@ import { loginFormStyles } from "./styles";
 import { BasicTextField } from "../../../../shared/components/BasicTextField";
 import { useLoginMutation } from "../../hooks";
 import { useRegistrationStore } from "../../../RegistrationModule/store/useRegistrationStore";
+import toast from "react-hot-toast";
 
 /**
  * Форма входа в систему.
@@ -77,6 +78,18 @@ export const LoginForm = () => {
             type="password"
             disabled={loginMutation.isPending}
           />
+          <Typography
+            component="p"
+            variant="body2"
+            sx={{ textDecoration: "underline" }}
+            onClick={() =>
+              toast.error(
+                "Пожалуйста, обратитесь в тех. поддержку, мы восстановим Ваш пароль!",
+              )
+            }
+          >
+            Забыли пароль?
+          </Typography>
           <Box>
             <Button
               type="submit"

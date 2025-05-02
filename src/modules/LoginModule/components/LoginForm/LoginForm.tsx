@@ -68,7 +68,9 @@ export const LoginForm = () => {
           <BasicTextField<LoginFormDataTypes>
             name="phone"
             label="Телефон"
-            placeholder="Введите логин"
+            placeholder="Введите телефон"
+            inputName="username"
+            autoComplete="username"
             disabled={loginMutation.isPending}
           />
           <BasicTextField<LoginFormDataTypes>
@@ -76,6 +78,8 @@ export const LoginForm = () => {
             label="Пароль"
             placeholder="Введите пароль"
             type="password"
+            inputName="current-password"
+            autoComplete="current-password"
             disabled={loginMutation.isPending}
           />
           <Typography

@@ -74,6 +74,8 @@ export const RegistrationForm = () => {
               name="phone"
               label="Телефон"
               placeholder="+7 705 123 45 67"
+              inputName="tel"
+              autoComplete="tel"
               disabled={postNewUserMutation.isPending}
             />
           </Box>
@@ -82,6 +84,8 @@ export const RegistrationForm = () => {
               name="email"
               label="E-mail"
               placeholder="Введите почту"
+              inputName="email"
+              autoComplete="email"
               disabled={postNewUserMutation.isPending}
             />
           </Box>
@@ -91,6 +95,8 @@ export const RegistrationForm = () => {
               label="Пароль"
               placeholder="Введите пароль"
               type="password"
+              inputName="new-password"
+              autoComplete="new-password"
               disabled={postNewUserMutation.isPending}
             />
             <PasswordRulesHint
@@ -104,6 +110,8 @@ export const RegistrationForm = () => {
               label="Повторите пароль"
               placeholder="Введите пароль повторно"
               type="password"
+              inputName="new-password"
+              autoComplete="new-password"
               disabled={postNewUserMutation.isPending}
             />
           </Box>

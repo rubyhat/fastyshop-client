@@ -16,6 +16,7 @@ import { customTheme } from "../../themes/customTheme";
 import { AuthProvider } from "../../providers/AuthProvider";
 import { loadingWrapperStyles } from "./styles";
 import { BottomNavigationMenu } from "../../shared/components/Mobile/BottomNavigationMenu";
+import { GlobalAutofillFix } from "./components/GlobalAutofillFix";
 
 const client = new QueryClient();
 
@@ -38,6 +39,7 @@ export const AppModule = () => {
       <QueryClientProvider client={client}>
         <ThemeProvider theme={customTheme}>
           <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ru}>
+            <GlobalAutofillFix />
             {isLoading ? (
               <Box sx={loadingWrapperStyles}>
                 <CircularProgress size={32} color="primary" />

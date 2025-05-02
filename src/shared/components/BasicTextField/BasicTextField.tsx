@@ -26,6 +26,9 @@ interface BasicTextFieldProps<T extends Record<string, unknown>> {
   /** Подсказка под инпутом */
   helperText?: React.ReactNode;
 
+  inputName?: string;
+  autoComplete?: string;
+
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
@@ -45,6 +48,8 @@ export const BasicTextField = <T extends Record<string, unknown>>({
   disabled,
   size,
   helperText,
+  inputName,
+  autoComplete,
   onClick,
 }: BasicTextFieldProps<T>) => {
   const {
@@ -59,15 +64,27 @@ export const BasicTextField = <T extends Record<string, unknown>>({
       render={({ field }) => (
         <TextField
           {...field}
+          name={inputName ?? name}
+          autoComplete={autoComplete}
           label={label}
           type={type}
           sx={{ width: 1 }}
-          slotProps={
-            {
-              // input: { sx: { fontSize: size === "small" ? 14 : 16 } },
-              // htmlInput: { sx: { p: 1.25 } },
-            }
-          }
+          slotProps={{
+            // input: { sx: { fontSize: size === "small" ? 14 : 16 } },
+            // htmlInput: { sx: { p: 1.25 } },
+            input: {
+              // Фиксим цветной бекграунд на странице логина в инпутах, когда браузер сам заполняет данные
+              sx: {
+                backgroundColor: "#fff",
+                "& input:-webkit-autofill": {
+                  boxShadow: "0 0 0 1000px white inset",
+                  WebkitBoxShadow: "0 0 0 1000px white inset",
+                  WebkitTextFillColor: "#000",
+                  transition: "background-color 5000s ease-in-out 0s",
+                },
+              },
+            },
+          }}
           placeholder={placeholder}
           error={!!fieldError?.message}
           helperText={(fieldError?.message as string) || helperText}

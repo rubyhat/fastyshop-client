@@ -11,12 +11,11 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { RouteList } from "../../routelist";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
-import { ToasterProvider } from "../../providers";
+import { GlobalAutofillFix } from "./components/GlobalAutofillFix";
+import { ToasterProvider, AuthProvider } from "../../providers";
 import { customTheme } from "../../themes/customTheme";
-import { AuthProvider } from "../../providers/AuthProvider";
 import { loadingWrapperStyles } from "./styles";
 import { BottomNavigationMenu } from "../../shared/components/Mobile/BottomNavigationMenu";
-import { GlobalAutofillFix } from "./components/GlobalAutofillFix";
 
 const client = new QueryClient();
 

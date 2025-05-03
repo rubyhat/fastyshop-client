@@ -1,0 +1,1 @@
+export { SellerLegalProfiles } from "./SellerLegalProfiles";

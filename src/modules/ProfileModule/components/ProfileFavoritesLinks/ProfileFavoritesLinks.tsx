@@ -45,7 +45,7 @@ export const ProfileFavoritesLinks = () => {
         <Box
           component={Paper}
           sx={profileFavoritesLinkItemStyles}
-          onClick={() => navigate("/seller-profile/create")}
+          onClick={() => navigate("/seller")}
         >
           <MdAddShoppingCart size={20} color="#1c1c1c" />
           <Typography component="p" variant="body2">

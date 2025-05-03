@@ -1,8 +1,8 @@
 import toast from "react-hot-toast";
 import { useAxiosMutation } from "../../../configs/useAxiosMutation";
-import { apiBecomeSellerModule } from "../api/apiBecomeSellerModule";
-import { useBecomeSellerStore } from "../store";
+import { useBecomeSellerStore } from "../../BecomeSellerModule/store";
 import { SellerProfileFormData } from "../validations/sellerProfileFormValidationSchema";
+import { apiSellerProfileFormModule } from "../api";
 
 export const usePostSellerProfileMutation = () => {
   const setStep = useBecomeSellerStore((state) => state.setStep);
@@ -12,7 +12,7 @@ export const usePostSellerProfileMutation = () => {
 
   return useAxiosMutation({
     mutationFn: (data: SellerProfileFormData) =>
-      apiBecomeSellerModule.postSellerProfile(data),
+      apiSellerProfileFormModule.postSellerProfile(data),
     onSuccess: (response) => {
       setSellerProfileId(response.id);
       setStep(2);

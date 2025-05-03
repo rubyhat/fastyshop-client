@@ -6,6 +6,8 @@ import { useBecomeSellerStore } from "./store";
 import { BecomeSellerProfile } from "./components/BecomeSellerProfile";
 import { BecomeSellerLegalProfile } from "./components/BecomeSellerLegalProfile";
 
+// todo: если пользователь уже имеет роль seller то отобразить сообщение
+// что он уже продавец и предложить перейти в профиль для создания магазина
 export const BecomeSellerModule = () => {
   const step = useBecomeSellerStore((state) => state.step);
 

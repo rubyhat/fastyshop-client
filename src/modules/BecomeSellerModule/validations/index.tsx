@@ -1,1 +1,1 @@
-export { sellerProfileFormValidationSchema } from "./sellerProfileFormValidationSchema";
+export { sellerProfileFormValidationSchema } from "../../SellerProfileFormModule/validations/sellerProfileFormValidationSchema";

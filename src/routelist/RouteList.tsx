@@ -13,6 +13,7 @@ const ShopDetails = React.lazy(() => import("../pages/ShopDetails"));
 const Orders = React.lazy(() => import("../pages/Orders"));
 
 const Seller = React.lazy(() => import("../pages/Seller"));
+const BecomeSeller = React.lazy(() => import("../pages/BecomeSeller"));
 
 const AccessDenied = React.lazy(() => import("../pages/System/AccessDenied"));
 const PageNotFound = React.lazy(() => import("../pages/System/PageNotFound"));
@@ -26,6 +27,7 @@ export const RouteList = () => {
 
       <Route path="/orders" element={<Orders />} />
       <Route path="/seller" element={<Seller />} />
+      <Route path="/seller/create" element={<BecomeSeller />} />
 
       <Route
         path="/profile"

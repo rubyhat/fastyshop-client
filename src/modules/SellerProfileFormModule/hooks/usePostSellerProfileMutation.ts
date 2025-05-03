@@ -1,26 +1,27 @@
 import toast from "react-hot-toast";
 import { useAxiosMutation } from "../../../configs/useAxiosMutation";
-import { useBecomeSellerStore } from "../../BecomeSellerModule/store";
 import { SellerProfileFormData } from "../validations/sellerProfileFormValidationSchema";
 import { apiSellerProfileFormModule } from "../api";
+import { SellerProfileResponseData } from "../../../shared/interfaces";
 
-export const usePostSellerProfileMutation = () => {
-  const setStep = useBecomeSellerStore((state) => state.setStep);
-  const setSellerProfileId = useBecomeSellerStore(
-    (state) => state.setSellerProfileId,
-  );
+interface SellerProfileMutationProps {
+  onSuccessCallback?: (response: SellerProfileResponseData) => void;
+}
 
+export const usePostSellerProfileMutation = ({
+  onSuccessCallback,
+}: SellerProfileMutationProps) => {
   return useAxiosMutation({
     mutationFn: (data: SellerProfileFormData) =>
       apiSellerProfileFormModule.postSellerProfile(data),
     onSuccess: (response) => {
-      setSellerProfileId(response.id);
-      setStep(2);
+      if (onSuccessCallback) onSuccessCallback(response);
       return response;
     },
     onError: (error) => {
       toast.error(
-        "Произошла ошибка при создании профиля продавца" + error.message,
+        "Произошла ошибка при создании профиля продавца: " +
+          error.response?.data.error.message,
       );
     },
   });

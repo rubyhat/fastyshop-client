@@ -9,14 +9,17 @@ import {
   sellerProfileFormValidationSchema,
 } from "./validations";
 import { usePostSellerProfileMutation } from "./hooks";
+import { SellerProfileResponseData } from "../../shared/interfaces";
 
 interface SellerProfileFormModuleProps {
   onCancelNavigationLink: string;
   onResetForm: () => void;
+  onSuccessCallback?: (response: SellerProfileResponseData) => void;
 }
 export const SellerProfileFormModule = ({
   onCancelNavigationLink,
   onResetForm,
+  onSuccessCallback,
 }: SellerProfileFormModuleProps) => {
   const navigate = useNavigate();
   const methods = useForm<SellerProfileFormData>({
@@ -25,10 +28,11 @@ export const SellerProfileFormModule = ({
   });
 
   const { handleSubmit, reset } = methods;
-  const sellerProfileMutation = usePostSellerProfileMutation();
+  const sellerProfileMutation = usePostSellerProfileMutation({
+    onSuccessCallback,
+  });
 
   const onSubmit = (data: SellerProfileFormData) => {
-    devLogger.log(data);
     sellerProfileMutation.mutate(data);
   };
 

@@ -24,7 +24,8 @@ export const usePostLegalProfileMutation = () => {
     },
     onError: (error) => {
       toast.error(
-        "Произошла ошибка при сохранении юридического профиля" + error.message,
+        "Произошла ошибка при сохранении юридического профиля: " +
+          error.response?.data.error.message,
       );
     },
   });

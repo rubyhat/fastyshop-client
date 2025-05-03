@@ -20,7 +20,7 @@ interface BecomeSellerStore {
 }
 
 const initialState = {
-  step: 2,
+  step: 1,
   sellerProfileId: null,
   legalProfileId: null,
 };

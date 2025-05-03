@@ -1,9 +1,22 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { useBecomeSellerStore } from "../../store";
 import { SellerProfileFormModule } from "../../../SellerProfileFormModule";
+import { SellerProfileResponseData } from "../../../../shared/interfaces";
 
 export const BecomeSellerProfile = () => {
   const resetForm = useBecomeSellerStore((state) => state.resetForm);
+  const setStep = useBecomeSellerStore((state) => state.setStep);
+  const setSellerProfileId = useBecomeSellerStore(
+    (state) => state.setSellerProfileId,
+  );
+
+  const handleSuccessSellerProfileReq = (
+    response: SellerProfileResponseData,
+  ) => {
+    setSellerProfileId(response.id);
+    setStep(2);
+  };
+
   return (
     <Box py={2}>
       <Box component={Paper} sx={{ p: 2 }}>
@@ -20,6 +33,7 @@ export const BecomeSellerProfile = () => {
         <SellerProfileFormModule
           onResetForm={resetForm}
           onCancelNavigationLink="/profile"
+          onSuccessCallback={handleSuccessSellerProfileReq}
         />
       </Box>
     </Box>

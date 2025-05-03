@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
+import { apiSellerProfileFormModule } from "../api";
 import { useAxiosMutation } from "../../../configs/useAxiosMutation";
 import { SellerProfileFormData } from "../validations/sellerProfileFormValidationSchema";
-import { apiSellerProfileFormModule } from "../api";
 import { SellerProfileResponseData } from "../../../shared/interfaces";
 
 interface SellerProfileMutationProps {
@@ -23,6 +23,7 @@ export const usePostSellerProfileMutation = ({
         "Произошла ошибка при создании профиля продавца: " +
           error.response?.data.error.message,
       );
+      return error;
     },
   });
 };

@@ -1,0 +1,1 @@
+export { LegalProfileFormModule } from "./LegalProfileFormModule";

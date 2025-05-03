@@ -1,8 +1,8 @@
 import { axiosBaseWrap } from "../../../configs/api";
-import { LegalProfileFormData } from "../validations/legalProfileFormValidationSchema";
 import { LegalProfileResponseData } from "../../../shared/interfaces";
+import { LegalProfileFormData } from "../validations";
 
-export const apiBecomeSellerModule = {
+export const apiLegalProfileFormModule = {
   /** Создание юридического профиля продавца */
   postLegalProfile(
     data: LegalProfileFormData,

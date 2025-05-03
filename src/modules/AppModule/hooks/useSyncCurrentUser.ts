@@ -13,7 +13,6 @@ export const useSyncCurrentUser = () => {
 
   React.useEffect(() => {
     if (isSuccess && data) {
-      console.log(data);
       setUserProfile(data);
     }
   }, [isSuccess, data, setUserProfile]);

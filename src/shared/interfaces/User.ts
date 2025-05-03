@@ -8,7 +8,13 @@ export interface User {
   country_code: CountryCode;
   is_active: boolean;
   email: string;
-  first_name: string | null;
+  first_name: string;
   last_name: string | null;
   middle_name: string | null;
+}
+
+export interface PostNewUserResponseData {
+  user: User;
+  access_token: string;
+  refresh_token: string;
 }

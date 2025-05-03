@@ -47,7 +47,7 @@ export const LoginForm = () => {
    * @param {LoginFormDataTypes} data Данные формы (логин и пароль).
    */
   const handleFormSubmit = (data: LoginFormDataTypes) => {
-    const normalizedData = {
+    const normalizedData: LoginFormDataTypes = {
       ...data,
       phone: data.phone.slice(1), // Удаляем +
     };

@@ -23,6 +23,7 @@ export const RegistrationForm = () => {
     resolver: zodResolver(useRegistrationFormValidationSchema),
     defaultValues: {
       country_code: CountryCode.KZ,
+      first_name: "",
       phone: "+7",
       email: "",
     },
@@ -35,9 +36,11 @@ export const RegistrationForm = () => {
   const postNewUserMutation = usePostNewUserMutation();
 
   const onSubmit = (data: RegistrationFormData) => {
-    devLogger.log(data);
-    setShowRegistrationDrawer(false);
-    // postNewUserMutation.mutate(data);
+    const normalizedData: RegistrationFormData = {
+      ...data,
+      phone: data.phone.slice(1), // Удаляем +
+    };
+    postNewUserMutation.mutate(normalizedData);
   };
 
   const handleResetForm = () => {
@@ -76,6 +79,16 @@ export const RegistrationForm = () => {
               placeholder="+7 705 123 45 67"
               inputName="tel"
               autoComplete="tel"
+              disabled={postNewUserMutation.isPending}
+            />
+          </Box>
+          <Box pb={1}>
+            <BasicTextField<RegistrationFormData>
+              name="first_name"
+              label="Ваше имя"
+              placeholder="Введите имя"
+              inputName="name"
+              autoComplete="name"
               disabled={postNewUserMutation.isPending}
             />
           </Box>

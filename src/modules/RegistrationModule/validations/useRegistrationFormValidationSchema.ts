@@ -24,9 +24,8 @@ export const useRegistrationFormValidationSchema = z
 
     first_name: z
       .string()
-      .max(255, { message: "Слишком длинное значение" })
-      .optional()
-      .or(z.literal("")),
+      .min(1, { message: "Введите имя" })
+      .max(255, { message: "Слишком длинное значение" }),
 
     last_name: z
       .string()

@@ -12,17 +12,22 @@ interface BecomeSellerStore {
   sellerProfileId: string | null;
   setSellerProfileId: (v: string | null) => void;
 
+  legalProfileId: string | null;
+  setLegalProfileId: (v: string | null) => void;
+
   /** Сброс формы в изначальное состояние при клике отмены или закрытии */
   resetForm: () => void;
 }
 
 const initialState = {
-  step: 1,
+  step: 2,
   sellerProfileId: null,
+  legalProfileId: null,
 };
 
 export const useBecomeSellerStore = create<BecomeSellerStore>((set) => ({
   ...initialState,
+  setLegalProfileId: (v) => set({ legalProfileId: v }),
   setSellerProfileId: (v) => set({ sellerProfileId: v }),
   setStep: (v) => set({ step: v }),
 

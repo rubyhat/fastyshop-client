@@ -16,6 +16,7 @@ export const usePostSellerProfileMutation = () => {
     onSuccess: (response) => {
       setSellerProfileId(response.id);
       setStep(2);
+      return response;
     },
     onError: (error) => {
       toast.error(

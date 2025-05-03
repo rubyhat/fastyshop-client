@@ -130,6 +130,7 @@ export const ProfileDetailsEditUserForm = () => {
             variant="contained"
             color="secondary"
             onClick={handleResetForm}
+            disabled={patchUserProfileMutation.isPending}
           >
             Закрыть
           </Button>

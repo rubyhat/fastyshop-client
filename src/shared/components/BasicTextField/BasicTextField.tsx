@@ -29,6 +29,12 @@ interface BasicTextFieldProps<T extends Record<string, unknown>> {
   inputName?: string;
   autoComplete?: string;
 
+  /** If true, a textarea element is rendered instead of an input. */
+  multiline?: boolean | undefined;
+
+  /** Minimum number of rows to display when multiline option is set to true. */
+  minRows?: string | number | undefined;
+
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
@@ -50,6 +56,8 @@ export const BasicTextField = <T extends Record<string, unknown>>({
   helperText,
   inputName,
   autoComplete,
+  multiline,
+  minRows,
   onClick,
 }: BasicTextFieldProps<T>) => {
   const {
@@ -91,6 +99,8 @@ export const BasicTextField = <T extends Record<string, unknown>>({
           disabled={disabled}
           size={size}
           onClick={onClick}
+          multiline={multiline}
+          minRows={minRows}
         />
       )}
     />

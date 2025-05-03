@@ -1,0 +1,1 @@
+export { sellerProfileFormValidationSchema } from "./sellerProfileFormValidationSchema";

@@ -20,6 +20,10 @@ jobs:
       - name: 📦 Установка зависимостей
         run: pnpm install
 
+      - name: 📝 Создание .env.production из секрета
+        run: |
+          echo "${{ secrets.ENV_PRODUCTION }}" > .env.production
+
       - name: 🛠 Сборка фронтенда
         run: pnpm build
 

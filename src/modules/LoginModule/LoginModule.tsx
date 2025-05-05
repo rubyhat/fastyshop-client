@@ -14,6 +14,7 @@ import { RegistrationModule } from "../RegistrationModule";
  */
 export const LoginModule = () => {
   useLogoutEffect();
+
   return (
     <Container maxWidth={false}>
       <Grid container justifyContent="center" alignItems="center">

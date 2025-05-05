@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { apiLoginModule } from "../../modules/LoginModule/api";
 import { useLoginStore } from "../../modules/LoginModule/store";
 import { LoginResponseData } from "../../modules/LoginModule/interfaces";
+import { ENVIRONMENT } from "../../constants/envs";
 
 /**
  * Функция для обновления `access_token`
@@ -26,6 +27,12 @@ export const refreshAccessToken =
       console.error("Ошибка обновления токена:", error);
       toast.error("Сессия истекла. Войдите снова.");
       useLoginStore.getState().logout();
+      // todo: сделать редирект при помощи react-router-dom
+      if (window.location.pathname !== "login")
+        window.location.href =
+          ENVIRONMENT === "production"
+            ? "https://fastyshop.kz/login?session_end=true"
+            : "http://localhost:7777/login?session_end=true";
       return null;
     }
   };

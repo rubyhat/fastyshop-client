@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   CircularProgress,
@@ -17,6 +18,8 @@ import { BasicTextField } from "../../../../shared/components/BasicTextField";
 import { useLoginMutation } from "../../hooks";
 import { useRegistrationStore } from "../../../RegistrationModule/store/useRegistrationStore";
 import toast from "react-hot-toast";
+import React from "react";
+import { useSearchParams } from "react-router-dom";
 
 /**
  * Форма входа в систему.
@@ -29,6 +32,19 @@ import toast from "react-hot-toast";
  * @returns React-компонент формы входа
  */
 export const LoginForm = () => {
+  const [showSessionEndAlert, setShowSessionEndAlert] =
+    React.useState<boolean>(false);
+  const [params] = useSearchParams();
+  const session_end = params.get("session_end");
+
+  React.useEffect(() => {
+    if (session_end && session_end === "true") {
+      setShowSessionEndAlert(true);
+    } else {
+      setShowSessionEndAlert(false);
+    }
+  }, [session_end]);
+
   const setShowRegistrationDrawer = useRegistrationStore(
     (state) => state.setShowRegistrationDrawer,
   );
@@ -56,6 +72,11 @@ export const LoginForm = () => {
 
   return (
     <FormProvider {...methods}>
+      {showSessionEndAlert && (
+        <Alert severity="error" sx={{ mb: 1 }}>
+          Ваша сессия истекла, пожалуйста, войдите снова.
+        </Alert>
+      )}
       <Box component={Paper}>
         <Box
           component="form"
@@ -65,6 +86,7 @@ export const LoginForm = () => {
           <Typography component="h1" variant="h4">
             Добро пожаловать!
           </Typography>
+
           <BasicTextField<LoginFormDataTypes>
             name="phone"
             label="Телефон"

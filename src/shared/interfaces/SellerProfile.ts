@@ -1,3 +1,4 @@
+// todo: SellerProfileResponseData -> SellerProfile надо ли переименовать?
 export interface SellerProfileResponseData {
   id: string;
   display_name: string;

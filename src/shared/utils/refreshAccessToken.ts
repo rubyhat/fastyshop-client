@@ -28,7 +28,7 @@ export const refreshAccessToken =
       toast.error("Сессия истекла. Войдите снова.");
       useLoginStore.getState().logout();
       // todo: сделать редирект при помощи react-router-dom
-      if (window.location.pathname !== "login")
+      if (window.location.pathname !== "/login")
         window.location.href =
           ENVIRONMENT === "production"
             ? "https://fastyshop.kz/login?session_end=true"

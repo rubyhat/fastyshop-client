@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   FormControl,
   FormHelperText,
   MenuItem,
@@ -9,6 +10,8 @@ import {
 import { Controller, useFormContext } from "react-hook-form";
 import { formControlStyles } from "../../styles";
 
+// todo: Сделать по размерам таким же, как <BasicTextField />
+
 /**
  * Пропсы для компонента `BasicFormSelectField`.
  */
@@ -17,7 +20,7 @@ interface BasicFormSelectFieldProps {
   name: string;
 
   /** Заголовок, отображаемая над полем */
-  label: string;
+  label?: string;
 
   /** Текст-заполнитель (placeholder), отображаемый при пустом значении */
   placeholder: string;
@@ -27,6 +30,12 @@ interface BasicFormSelectFieldProps {
 
   /** Флаг блокировки выбора (`true` - поле заблокировано) */
   disabled: boolean;
+
+  /** Опции для кнопки в селекте */
+  buttonOptions?: {
+    buttonLabel: string;
+    onButtonClick: () => void;
+  };
 }
 
 /**
@@ -40,6 +49,7 @@ export const BasicFormSelectField = ({
   label,
   placeholder,
   data,
+  buttonOptions,
   disabled = false,
 }: BasicFormSelectFieldProps) => {
   const { formState, control } = useFormContext();
@@ -47,9 +57,11 @@ export const BasicFormSelectField = ({
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-      <Typography component="p" variant="body1" sx={{ textWrap: "nowrap" }}>
-        {label}
-      </Typography>
+      {label && (
+        <Typography component="p" variant="body1" sx={{ textWrap: "nowrap" }}>
+          {label}
+        </Typography>
+      )}
       <FormControl sx={formControlStyles(Boolean(errors[name]))}>
         <Controller
           name={name}
@@ -74,6 +86,18 @@ export const BasicFormSelectField = ({
                   {item.label}
                 </MenuItem>
               ))}
+              {buttonOptions && (
+                <MenuItem>
+                  <Button
+                    variant="outlined"
+                    color="success"
+                    onClick={buttonOptions.onButtonClick}
+                    fullWidth
+                  >
+                    {buttonOptions.buttonLabel}
+                  </Button>
+                </MenuItem>
+              )}
             </Select>
           )}
         />

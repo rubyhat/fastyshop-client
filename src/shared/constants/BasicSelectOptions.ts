@@ -1,5 +1,6 @@
 import { LegalForm, LegalFormDisplayText } from "../interfaces";
 import { CountryCode, CountryCodeDisplayText } from "../interfaces/Country";
+import { ShopType, ShopTypeDisplayText } from "../interfaces/Shop";
 
 export const countrySelectOptions = (): {
   value: CountryCode;
@@ -63,4 +64,26 @@ export const legalFormSelectOptions = (): {
   ];
 
   return legalFormList;
+};
+
+export const shopTypesSelectOptions = (): {
+  value: ShopType;
+  label: ShopTypeDisplayText;
+}[] => {
+  const countryList = [
+    {
+      value: ShopType.online,
+      label: ShopTypeDisplayText[ShopType.online],
+    },
+    {
+      value: ShopType.hybrid,
+      label: ShopTypeDisplayText[ShopType.hybrid],
+    },
+    {
+      value: ShopType.offline,
+      label: ShopTypeDisplayText[ShopType.offline],
+    },
+  ];
+
+  return countryList;
 };

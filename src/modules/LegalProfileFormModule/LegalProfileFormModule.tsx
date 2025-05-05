@@ -18,11 +18,13 @@ import {
 } from "../../shared/constants";
 
 interface LegalProfileFormModuleProps {
+  submitButtonLabel?: string;
   onClickReturnButton: () => void;
   onSuccessCallback?: (response: LegalProfileResponseData) => void;
 }
 
 export const LegalProfileFormModule = ({
+  submitButtonLabel = "Продолжить",
   onClickReturnButton,
   onSuccessCallback,
 }: LegalProfileFormModuleProps) => {
@@ -136,7 +138,7 @@ export const LegalProfileFormModule = ({
             type="submit"
             disabled={legalProfileMutation.isPending}
           >
-            Продолжить
+            {submitButtonLabel}
           </Button>
         </Box>
       </Box>

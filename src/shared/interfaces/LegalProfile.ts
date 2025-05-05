@@ -1,5 +1,6 @@
 import { CountryCode } from "./Country";
 
+// todo: LegalProfileResponseData -> LegalProfile нужно ли переименовать?
 export interface LegalProfileResponseData {
   id: string;
   company_name: string;

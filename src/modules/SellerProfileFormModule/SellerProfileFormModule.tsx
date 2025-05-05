@@ -1,14 +1,15 @@
-import { Box, Button, Typography } from "@mui/material";
-import { FormProvider, useForm } from "react-hook-form";
-import { devLogger } from "../../shared/utils";
-import { BasicTextField } from "../../shared/components/BasicTextField";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Box, Button, Typography } from "@mui/material";
+import { FormProvider, useForm } from "react-hook-form";
+
+import { usePostSellerProfileMutation } from "./hooks";
 import {
   SellerProfileFormData,
   sellerProfileFormValidationSchema,
 } from "./validations";
-import { usePostSellerProfileMutation } from "./hooks";
+import { devLogger } from "../../shared/utils";
+import { BasicTextField } from "../../shared/components/BasicTextField";
 import { SellerProfileResponseData } from "../../shared/interfaces";
 
 interface SellerProfileFormModuleProps {

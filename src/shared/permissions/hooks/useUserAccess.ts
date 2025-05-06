@@ -6,5 +6,6 @@ export const useUserProfile = () => useUserStore((s) => s.profile);
 export const useUserRole = () => useUserStore((s) => s.role);
 export const useIsAuthenticated = () =>
   Boolean(useLoginStore((s) => s.accessToken));
+export const useIsUser = () => useUserRole() === UserRole.user;
 export const useIsSeller = () => useUserRole() === UserRole.seller;
 export const useIsAdmin = () => useUserRole() === UserRole.superadmin;

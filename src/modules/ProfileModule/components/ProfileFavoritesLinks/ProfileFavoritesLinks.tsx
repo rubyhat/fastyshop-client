@@ -10,12 +10,12 @@ import {
   profileFavoritesLinksStyles,
 } from "./styles";
 
-import { useUserStore } from "../../../UserModule/store";
-import { UserRole } from "../../../../shared/permissions/roles";
+import { useIsSeller, useIsUser } from "../../../../shared/permissions/hooks";
 
 export const ProfileFavoritesLinks = () => {
   const navigate = useNavigate();
-  const { role } = useUserStore();
+  const isSeller = useIsSeller();
+  const isUser = useIsUser();
 
   return (
     <Box sx={profileFavoritesLinksStyles}>
@@ -29,7 +29,7 @@ export const ProfileFavoritesLinks = () => {
           Мои покупки
         </Typography>
       </Box>
-      {role && role === UserRole.seller && (
+      {isSeller && (
         <Box
           component={Paper}
           sx={profileFavoritesLinkItemStyles}
@@ -41,7 +41,7 @@ export const ProfileFavoritesLinks = () => {
           </Typography>
         </Box>
       )}
-      {role && role === UserRole.user && (
+      {isUser && (
         <Box
           component={Paper}
           sx={profileFavoritesLinkItemStyles}

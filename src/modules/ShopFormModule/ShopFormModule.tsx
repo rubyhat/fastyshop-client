@@ -22,8 +22,7 @@ import {
   useGetAllUsersLegalProfilesQuery,
   useGetSellerProfileByUserIdQuery,
 } from "../../shared/hooks";
-import { useUserProfile } from "../../shared/permissions/hooks";
-import { UserRole } from "../../shared/permissions/roles";
+import { useIsSeller, useUserProfile } from "../../shared/permissions/hooks";
 
 interface ShopFormModuleProps {
   onClickReturnButton: () => void;
@@ -35,6 +34,7 @@ export const ShopFormModule = ({
   onSuccessCallback,
 }: ShopFormModuleProps) => {
   const profile = useUserProfile();
+  const isSeller = useIsSeller();
   const setShowCreateLegalProfileDrawer = useBecomeSellerStore(
     (state) => state.setShowCreateLegalProfileDrawer,
   );
@@ -45,7 +45,7 @@ export const ShopFormModule = ({
 
   const { data: dataSellerProfileByUserId } = useGetSellerProfileByUserIdQuery(
     profile?.id,
-    profile?.role === UserRole.seller,
+    isSeller,
   );
 
   const {
@@ -58,10 +58,7 @@ export const ShopFormModule = ({
     data: dataLegalProfiles,
     isLoading: isLoadingLegalProfiles,
     isSuccess: isSuccessLegalProfiles,
-  } = useGetAllUsersLegalProfilesQuery(
-    profile?.id,
-    profile?.role === UserRole.seller,
-  );
+  } = useGetAllUsersLegalProfilesQuery(profile?.id, isSeller);
 
   const methods = useForm<ShopFormData>({
     resolver: zodResolver(shopFormValidationsSchema),

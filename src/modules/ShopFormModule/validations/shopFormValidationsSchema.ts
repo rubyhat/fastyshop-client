@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { ShopType } from "../../../shared/interfaces/Shop";
+import { phoneRegex } from "../../../shared/constants";
 
 export const shopFormValidationsSchema = z
   .object({
@@ -10,10 +11,15 @@ export const shopFormValidationsSchema = z
 
     contact_phone: z
       .string()
-      .min(1, { message: "Укажите контактный телефон" })
-      .max(255, { message: "Слишком длинное значение" }),
+      .regex(phoneRegex, {
+        message: "Телефон должен начинаться с +7 и содержать 10 цифр",
+      })
+      .max(12, { message: "Слишком длинный номер телефона" }),
 
-    contact_email: z.string().max(255, { message: "Слишком длинное значение" }),
+    contact_email: z
+      .string()
+      .max(255, { message: "Слишком длинное значение" })
+      .email({ message: "Некорректный формат email" }),
 
     physical_address: z
       .string()

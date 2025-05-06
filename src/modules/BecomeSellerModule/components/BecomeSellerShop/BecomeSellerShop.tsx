@@ -1,13 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import { Box, Paper, Typography } from "@mui/material";
-import { ShopFormModule } from "../../../ShopFormModule";
+
 import { useBecomeSellerStore } from "../../store";
+import { ShopFormModule } from "../../../ShopFormModule";
+import { ShopData } from "../../../../shared/interfaces/Shop";
 
 export const BecomeSellerShop = () => {
+  const navigate = useNavigate();
   const setStep = useBecomeSellerStore((state) => state.setStep);
+  const resetForm = useBecomeSellerStore((state) => state.resetForm);
 
-  const handleSuccessShopReq = () => {
-    // todo: редирект на страницу настроек созданного магазина
-    // очистить стейт текущего модуля
+  const handleSuccessShopReq = (response: ShopData) => {
+    navigate("/shops/" + response.id);
+    resetForm();
   };
 
   return (

@@ -1,12 +1,5 @@
 import { z } from "zod";
-
-/**
- * Регулярное выражение для проверки номера телефона:
- * - начинается с +7
- * - допускает 10 цифр после +7 (всего 12 символов)
- * - без пробелов, дефисов и скобок
- */
-const phoneRegex = /^\+7\d{10}$/;
+import { phoneRegex } from "../../../shared/constants";
 
 export const useRegistrationFormValidationSchema = z
   .object({

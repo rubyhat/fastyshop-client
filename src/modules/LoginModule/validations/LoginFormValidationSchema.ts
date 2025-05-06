@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { phoneRegex } from "../../../shared/constants";
 
 /**
  * Схема валидации формы входа.
@@ -8,7 +9,6 @@ import { z } from "zod";
  * - `password` - обязательное поле, строка.
  */
 
-const phoneRegex = /^\+7\d{10}$/;
 export const LoginFormValidationSchema = z.object({
   /** Логин пользователя (обязательное поле) */
   phone: z

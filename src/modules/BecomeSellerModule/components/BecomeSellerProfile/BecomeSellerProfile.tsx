@@ -1,7 +1,9 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { useBecomeSellerStore } from "../../store";
+import { useUserStore } from "../../../UserModule/store";
 import { SellerProfileFormModule } from "../../../SellerProfileFormModule";
 import { SellerProfileResponseData } from "../../../../shared/interfaces";
+import { UserRole } from "../../../../shared/permissions/roles";
 
 export const BecomeSellerProfile = () => {
   const resetForm = useBecomeSellerStore((state) => state.resetForm);
@@ -9,10 +11,16 @@ export const BecomeSellerProfile = () => {
   const setSellerProfileId = useBecomeSellerStore(
     (state) => state.setSellerProfileId,
   );
+  const currentUserProfile = useUserStore((state) => state.profile);
+  const setUserProfile = useUserStore((state) => state.setUserProfile);
 
   const handleSuccessSellerProfileReq = (
     response: SellerProfileResponseData,
   ) => {
+    if (currentUserProfile) {
+      const mutatedProfile = { ...currentUserProfile, role: UserRole.seller };
+      setUserProfile(mutatedProfile);
+    }
     setSellerProfileId(response.id);
     setStep(2);
   };

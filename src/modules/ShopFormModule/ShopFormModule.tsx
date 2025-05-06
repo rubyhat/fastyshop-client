@@ -1,14 +1,17 @@
+import React from "react";
 import { Alert, Box, Button, Skeleton } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { ShopFormData, shopFormValidationsSchema } from "./validations";
 import { useBecomeSellerStore } from "../BecomeSellerModule/store";
+import { usePostShopMutation } from "./hooks/usePostShopMutation";
 
 import { devLogger } from "../../shared/utils";
 import { BasicFormSelectField } from "../../shared/components/BasicFormSelectField";
 import { shopTypesSelectOptions } from "../../shared/constants";
 import {
+  ShopData,
   ShopType,
   ShopTypeDescription,
   ShopTypeDisplayText,
@@ -20,12 +23,11 @@ import {
   useGetSellerProfileByUserIdQuery,
 } from "../../shared/hooks";
 import { useUserProfile } from "../../shared/permissions/hooks";
-import React from "react";
-import { usePostShopMutation } from "./hooks/usePostShopMutation";
+import { UserRole } from "../../shared/permissions/roles";
 
 interface ShopFormModuleProps {
   onClickReturnButton: () => void;
-  onSuccessCallback?: (response: object) => void;
+  onSuccessCallback?: (response: ShopData) => void;
 }
 
 export const ShopFormModule = ({
@@ -39,9 +41,11 @@ export const ShopFormModule = ({
   const sellerProfileId = useBecomeSellerStore(
     (state) => state.sellerProfileId,
   );
+  const legalProfileId = useBecomeSellerStore((state) => state.legalProfileId);
 
   const { data: dataSellerProfileByUserId } = useGetSellerProfileByUserIdQuery(
     profile?.id,
+    profile?.role === UserRole.seller,
   );
 
   const {
@@ -54,7 +58,10 @@ export const ShopFormModule = ({
     data: dataLegalProfiles,
     isLoading: isLoadingLegalProfiles,
     isSuccess: isSuccessLegalProfiles,
-  } = useGetAllUsersLegalProfilesQuery(profile?.id);
+  } = useGetAllUsersLegalProfilesQuery(
+    profile?.id,
+    profile?.role === UserRole.seller,
+  );
 
   const methods = useForm<ShopFormData>({
     resolver: zodResolver(shopFormValidationsSchema),
@@ -79,7 +86,11 @@ export const ShopFormModule = ({
     } else if (dataSellerProfileByUserId) {
       setValue("seller_profile_id", dataSellerProfileByUserId.id);
     }
-  }, [dataSellerProfileByUserId, sellerProfileId, setValue]);
+
+    if (legalProfileId) {
+      setValue("legal_profile_id", legalProfileId);
+    }
+  }, [dataSellerProfileByUserId, legalProfileId, sellerProfileId, setValue]);
 
   const shopMutation = usePostShopMutation({
     onSuccessCallback,
@@ -135,14 +146,23 @@ export const ShopFormModule = ({
               <Skeleton variant="rounded" width="100%" height={41} />
             )}
             {dataShopsCategories && isSuccessShopsCategories && (
-              <BasicFormSelectField
-                name="shop_category_id"
-                placeholder="Категория магазина"
-                data={dataShopsCategories.map(({ id, title }) => {
-                  return { value: id, label: title };
-                })}
-                disabled={false}
-              />
+              <React.Fragment>
+                <BasicFormSelectField
+                  name="shop_category_id"
+                  placeholder="Категория магазина"
+                  data={dataShopsCategories.map(({ id, title }) => {
+                    return { value: id, label: title };
+                  })}
+                  disabled={false}
+                />
+                <Alert severity="info" sx={{ mt: 2 }}>
+                  <strong>Категория магазина</strong>
+                  <br />
+                  Это общая характеристика магазина, которая используется в
+                  рекламных компаниях нашего сервиса. Вы сможете изменить ее в
+                  любое время
+                </Alert>
+              </React.Fragment>
             )}
           </Box>
           <Box sx={{ pb: 2 }}>

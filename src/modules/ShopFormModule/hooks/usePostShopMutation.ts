@@ -1,5 +1,4 @@
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useAxiosMutation } from "../../../configs/useAxiosMutation";
@@ -14,7 +13,6 @@ interface ShopMutationProps {
 export const usePostShopMutation = ({
   onSuccessCallback,
 }: ShopMutationProps) => {
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   return useAxiosMutation({
@@ -27,7 +25,7 @@ export const usePostShopMutation = ({
       queryClient.invalidateQueries({
         queryKey: ["get-shop-by-id", response?.id],
       });
-      navigate("/shops/" + response.id);
+
       toast.success("Магазин успешно создан!");
     },
     onError: (error) => {

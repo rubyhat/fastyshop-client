@@ -7,11 +7,14 @@ import { BecomeSellerProfile } from "./components/BecomeSellerProfile";
 import { BecomeSellerLegalProfile } from "./components/BecomeSellerLegalProfile";
 import { BecomeSellerShop } from "./components/BecomeSellerShop";
 import { BecomeSellerCreateLegalProfileDrawer } from "./components/BecomeSellerCreateLegalProfileDrawer";
+import { useUserProfile } from "../../shared/permissions/hooks";
+import { UserRole } from "../../shared/permissions/roles";
 
 // todo: если пользователь уже имеет роль seller то отобразить сообщение
 // что он уже продавец и предложить перейти в профиль для создания магазина
 export const BecomeSellerModule = () => {
   const step = useBecomeSellerStore((state) => state.step);
+  const profile = useUserProfile();
 
   return (
     <React.Fragment>
@@ -22,11 +25,17 @@ export const BecomeSellerModule = () => {
       />
       <Container maxWidth={false}>
         <Grid container spacing={2}>
-          <Grid size={12}>
-            {step === 1 && <BecomeSellerProfile />}
-            {step === 2 && <BecomeSellerLegalProfile />}
-            {step === 3 && <BecomeSellerShop />}
-          </Grid>
+          {profile && profile.role === UserRole.seller ? (
+            <Grid size={12}>
+              <BecomeSellerShop returnToProfile />
+            </Grid>
+          ) : (
+            <Grid size={12}>
+              {step === 1 && <BecomeSellerProfile />}
+              {step === 2 && <BecomeSellerLegalProfile />}
+              {step === 3 && <BecomeSellerShop />}
+            </Grid>
+          )}
         </Grid>
       </Container>
       <BecomeSellerCreateLegalProfileDrawer />

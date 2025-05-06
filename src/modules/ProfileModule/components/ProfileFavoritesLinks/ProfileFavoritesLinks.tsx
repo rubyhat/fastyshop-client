@@ -33,7 +33,7 @@ export const ProfileFavoritesLinks = () => {
         <Box
           component={Paper}
           sx={profileFavoritesLinkItemStyles}
-          onClick={() => navigate("/shops")}
+          onClick={() => navigate("/seller")}
         >
           <FaShop size={20} color="#1c1c1c" />
           <Typography component="p" variant="body2">

@@ -5,7 +5,13 @@ import { useBecomeSellerStore } from "../../store";
 import { ShopFormModule } from "../../../ShopFormModule";
 import { ShopData } from "../../../../shared/interfaces/Shop";
 
-export const BecomeSellerShop = () => {
+interface BecomeSellerShopProps {
+  returnToProfile?: boolean;
+}
+
+export const BecomeSellerShop = ({
+  returnToProfile = false,
+}: BecomeSellerShopProps) => {
   const navigate = useNavigate();
   const setStep = useBecomeSellerStore((state) => state.setStep);
   const resetForm = useBecomeSellerStore((state) => state.resetForm);
@@ -15,8 +21,12 @@ export const BecomeSellerShop = () => {
     resetForm();
   };
 
+  const handleClickBackButton = () => {
+    return returnToProfile ? navigate("/profile") : setStep(1);
+  };
+
   return (
-    <Box py={2}>
+    <Box pt={2} pb={5}>
       <Box component={Paper} sx={{ p: 2 }}>
         <Typography component="h6" variant="h6">
           Создание магазина
@@ -29,7 +39,7 @@ export const BecomeSellerShop = () => {
           Настройки будущего магазина
         </Typography>
         <ShopFormModule
-          onClickReturnButton={() => setStep(1)}
+          onClickReturnButton={handleClickBackButton}
           onSuccessCallback={handleSuccessShopReq}
         />
       </Box>

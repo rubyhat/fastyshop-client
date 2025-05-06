@@ -18,7 +18,7 @@ export const SellerProfileInfo = ({ userId }: SellerProfileInfoProps) => {
   } = useGetSellerProfileByUserIdQuery(userId);
 
   if (isLoadingSellerProfile) {
-    return <Skeleton variant="rounded" width="100%" height={50} />;
+    return <Skeleton variant="rounded" width="100%" height={150} />;
   }
 
   if (dataSellerProfile) {

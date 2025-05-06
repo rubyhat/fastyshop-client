@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { SellerShopsInfo } from "../SellerShopsInfo";
 
 export const SellerShops = () => {
   return (
@@ -13,6 +14,7 @@ export const SellerShops = () => {
       >
         Ваши созданные магазины
       </Typography>
+      <SellerShopsInfo />
     </Box>
   );
 };

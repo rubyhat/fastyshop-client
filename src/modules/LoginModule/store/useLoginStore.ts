@@ -68,13 +68,11 @@ export const useLoginStore = create<LoginStore>((set) => ({
       const decoded = decodeToken(accessToken);
 
       if (decoded) {
-        useUserStore
-          .getState()
-          .setUserFromToken({
-            role: decoded.role,
-            phone: decoded.phone,
-            first_name: decoded.first_name,
-          });
+        useUserStore.getState().setUserFromToken({
+          role: decoded.role,
+          phone: decoded.phone,
+          first_name: decoded.first_name,
+        });
       }
     }
   },

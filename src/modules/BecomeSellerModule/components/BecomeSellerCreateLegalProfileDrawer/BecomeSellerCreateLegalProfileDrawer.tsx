@@ -1,9 +1,5 @@
-import toast from "react-hot-toast";
-import { Box } from "@mui/material";
-
-import { BasicDrawer } from "../../../../shared/components/BasicDrawer";
-import { LegalProfileFormModule } from "../../../LegalProfileFormModule";
 import { useBecomeSellerStore } from "../../store";
+import { CreateLegalProfileDrawer } from "../../../../shared/components/CreateLegalProfileDrawer";
 
 export const BecomeSellerCreateLegalProfileDrawer = () => {
   const showCreateLegalProfileDrawer = useBecomeSellerStore(
@@ -13,28 +9,10 @@ export const BecomeSellerCreateLegalProfileDrawer = () => {
     (state) => state.setShowCreateLegalProfileDrawer,
   );
 
-  const handleClickReturnButton = () => {
-    setShowCreateLegalProfileDrawer(false);
-  };
-
-  const handleSuccessCallBack = () => {
-    setShowCreateLegalProfileDrawer(false);
-    toast.success("Новый юридический профиль успешно создан!");
-  };
-
   return (
-    <BasicDrawer
-      title="Создание юридического профиля"
+    <CreateLegalProfileDrawer
       isOpen={showCreateLegalProfileDrawer}
       setIsOpen={setShowCreateLegalProfileDrawer}
-    >
-      <Box px={2}>
-        <LegalProfileFormModule
-          submitButtonLabel="Сохранить"
-          onClickReturnButton={handleClickReturnButton}
-          onSuccessCallback={handleSuccessCallBack}
-        />
-      </Box>
-    </BasicDrawer>
+    />
   );
 };

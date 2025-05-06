@@ -1,5 +1,6 @@
 // 📁 shared/hooks/useSyncCurrentUser.ts
 import React from "react";
+import Cookies from "js-cookie";
 import { useGetCurrentUserQuery } from "../../UserModule/hooks";
 import { useUserStore } from "../../UserModule/store";
 
@@ -8,7 +9,8 @@ import { useUserStore } from "../../UserModule/store";
  * и синхронизирует их с UserStore.
  */
 export const useSyncCurrentUser = () => {
-  const { data, isSuccess } = useGetCurrentUserQuery(true);
+  const refreshToken = Cookies.get("refresh_token");
+  const { data, isSuccess } = useGetCurrentUserQuery(Boolean(refreshToken));
   const setUserProfile = useUserStore((s) => s.setUserProfile);
 
   React.useEffect(() => {

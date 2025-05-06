@@ -7,7 +7,5 @@ export const boxWrapperStyles = {
 export const boxItemStyles = {
   mt: 1,
   p: 1,
-  border: "1px solid",
-  borderColor: "customColors.labelsQuaternary",
   borderRadius: 2,
 };

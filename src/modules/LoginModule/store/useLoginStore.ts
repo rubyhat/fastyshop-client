@@ -70,7 +70,11 @@ export const useLoginStore = create<LoginStore>((set) => ({
       if (decoded) {
         useUserStore
           .getState()
-          .setUserFromToken({ role: decoded.role, phone: decoded.phone });
+          .setUserFromToken({
+            role: decoded.role,
+            phone: decoded.phone,
+            first_name: decoded.first_name,
+          });
       }
     }
   },

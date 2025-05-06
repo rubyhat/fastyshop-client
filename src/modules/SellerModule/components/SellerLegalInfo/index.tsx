@@ -1,0 +1,1 @@
+export { SellerLegalInfo } from "./SellerLegalInfo";

@@ -35,6 +35,9 @@ interface DecodedToken {
 
   /** Телефон пользователя */
   phone: string;
+
+  /** Телефон пользователя */
+  first_name: string;
 }
 
 /** Тип токена */

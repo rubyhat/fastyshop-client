@@ -3,6 +3,7 @@ import { useGetSellerProfileByUserIdQuery } from "../../../../shared/hooks";
 import { AxiosErrorAlertMessage } from "../../../../shared/components/AxiosErrorAlertMessage";
 import { useNavigate } from "react-router-dom";
 import { boxItemStyles, boxWrapperStyles } from "./styles";
+import React from "react";
 
 interface SellerProfileInfoProps {
   userId: string;
@@ -23,19 +24,25 @@ export const SellerProfileInfo = ({ userId }: SellerProfileInfoProps) => {
 
   if (dataSellerProfile) {
     return (
-      <Box component={Paper} p={2} mt={1}>
-        <Typography component="p" variant="h6" fontWeight={700}>
-          {dataSellerProfile.display_name}
-        </Typography>
-        <Typography
-          component="p"
-          variant="body2"
-          color="customColors.labelsSecondary"
-        >
-          {dataSellerProfile.description}
-        </Typography>
+      <React.Fragment>
+        <Box component={Paper} sx={{ p: 1.5, mt: 1, borderRadius: 2 }}>
+          <Typography component="p" variant="h6" fontWeight={700}>
+            {dataSellerProfile.display_name}
+          </Typography>
+          <Typography
+            component="p"
+            variant="body2"
+            color="customColors.labelsSecondary"
+          >
+            {dataSellerProfile.description}
+          </Typography>
+        </Box>
         <Box sx={boxWrapperStyles}>
-          <Box onClick={() => navigate("/shops")} sx={boxItemStyles}>
+          <Box
+            onClick={() => navigate("/shops")}
+            sx={boxItemStyles}
+            component={Paper}
+          >
             <Typography component="p" variant="body2" fontWeight={700}>
               Всего заказов
             </Typography>
@@ -43,7 +50,7 @@ export const SellerProfileInfo = ({ userId }: SellerProfileInfoProps) => {
               1234
             </Typography>
           </Box>
-          <Box sx={boxItemStyles}>
+          <Box sx={boxItemStyles} component={Paper}>
             <Typography component="p" variant="body2" fontWeight={700}>
               Покупателей
             </Typography>
@@ -52,7 +59,7 @@ export const SellerProfileInfo = ({ userId }: SellerProfileInfoProps) => {
             </Typography>
           </Box>
         </Box>
-      </Box>
+      </React.Fragment>
     );
   }
 

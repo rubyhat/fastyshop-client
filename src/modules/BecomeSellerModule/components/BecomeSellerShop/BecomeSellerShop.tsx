@@ -16,12 +16,12 @@ export const BecomeSellerShop = ({
   const setStep = useBecomeSellerStore((state) => state.setStep);
   const resetForm = useBecomeSellerStore((state) => state.resetForm);
 
-  const handleSuccessShopReq = (response: ShopData) => {
+  const handleSuccessCallBack = (response: ShopData) => {
     navigate("/shops/" + response.id);
     resetForm();
   };
 
-  const handleClickBackButton = () => {
+  const handleClickReturnButton = () => {
     return returnToProfile ? navigate("/profile") : setStep(1);
   };
 
@@ -39,8 +39,8 @@ export const BecomeSellerShop = ({
           Настройки будущего магазина
         </Typography>
         <ShopFormModule
-          onClickReturnButton={handleClickBackButton}
-          onSuccessCallback={handleSuccessShopReq}
+          onClickReturnButton={handleClickReturnButton}
+          onSuccessCallback={handleSuccessCallBack}
         />
       </Box>
     </Box>

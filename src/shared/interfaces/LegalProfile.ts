@@ -7,7 +7,7 @@ export interface LegalProfileResponseData {
   tax_id: string;
   country_code: CountryCode;
   legal_address: string;
-  legal_form: string;
+  legal_form: LegalForm;
   is_verified: boolean;
   seller_profile_id: string;
   created_at: Date;

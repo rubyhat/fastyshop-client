@@ -48,9 +48,7 @@ axiosBaseWrap.interceptors.response.use(
     const status = error.response?.status;
 
     // todo: проверить это во время обновления токена
-    const isRefreshRequest = originalRequest.url?.includes(
-      "/auth/token/refresh",
-    );
+    const isRefreshRequest = originalRequest.url?.includes("/auth/refresh");
 
     // ⚠️ Пробрасываем ошибку дальше, если 401 произошел при попытке обновить токен
     if (status === 401 && isRefreshRequest) {
@@ -68,6 +66,11 @@ axiosBaseWrap.interceptors.response.use(
       } else {
         toast.error("Произошла непредвиденная ошибка сети.");
       }
+      return Promise.reject(error);
+    }
+
+    // Не пытаемся обновлять токен, если это ошибка авторизации по логину/паролю
+    if (status === 401 && originalRequest.url?.includes("/auth/login")) {
       return Promise.reject(error);
     }
 
@@ -116,8 +119,7 @@ axiosBaseWrap.interceptors.response.use(
         toast.error("Слишком много запросов. Попробуйте позже.");
         break;
       case 500:
-        toast.error("Произошла ошибка на сервере. Повторите попытку позже.");
-        break;
+        throw error;
       default:
         toast.error("Произошла ошибка. Пожалуйста, попробуйте снова.");
     }

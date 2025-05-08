@@ -82,7 +82,12 @@ export const CreateVerificationDrawer = ({
             </Box>
           </Box>
           <Box>
-            <Button fullWidth size="large" variant="contained">
+            <Button
+              fullWidth
+              size="large"
+              variant="contained"
+              onClick={() => setIsOpen(false)}
+            >
               Закрыть
             </Button>
           </Box>

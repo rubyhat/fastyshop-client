@@ -19,6 +19,9 @@ export const SellerLegalInfo = () => {
   const setShowCreateLegalProfileDrawer = useSellerStore(
     (state) => state.setShowCreateLegalProfileDrawer,
   );
+  const setShowVerificationDrawer = useSellerStore(
+    (state) => state.setShowVerificationDrawer,
+  );
 
   const {
     data: dataLegalProfile,
@@ -36,10 +39,7 @@ export const SellerLegalInfo = () => {
     if (isVerified) {
       toast.success("Верификация была успешно пройдена!");
     } else {
-      toast.error(
-        "Верификация не пройдена, обратитесь в службу поддержки support@fastyshop.kz",
-        { duration: 5000 },
-      );
+      setShowVerificationDrawer(true);
     }
   };
 

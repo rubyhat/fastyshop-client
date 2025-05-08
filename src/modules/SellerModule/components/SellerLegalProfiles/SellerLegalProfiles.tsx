@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { SellerLegalInfo } from "../SellerLegalInfo";
 import { CreateLegalProfileDrawer } from "../../../../shared/components/CreateLegalProfileDrawer";
 import { useSellerStore } from "../../store";
+import { CreateVerificationDrawer } from "../../../../shared/components/CreateVerificationDrawer";
 
 export const SellerLegalProfiles = () => {
   const showCreateLegalProfileDrawer = useSellerStore(
@@ -9,6 +10,13 @@ export const SellerLegalProfiles = () => {
   );
   const setShowCreateLegalProfileDrawer = useSellerStore(
     (state) => state.setShowCreateLegalProfileDrawer,
+  );
+
+  const showVerificationDrawer = useSellerStore(
+    (state) => state.showVerificationDrawer,
+  );
+  const setShowVerificationDrawer = useSellerStore(
+    (state) => state.setShowVerificationDrawer,
   );
 
   return (
@@ -24,6 +32,10 @@ export const SellerLegalProfiles = () => {
         Ваши юридические данные используемые в магазинах
       </Typography>
       <SellerLegalInfo />
+      <CreateVerificationDrawer
+        isOpen={showVerificationDrawer}
+        setIsOpen={setShowVerificationDrawer}
+      />
       <CreateLegalProfileDrawer
         isOpen={showCreateLegalProfileDrawer}
         setIsOpen={setShowCreateLegalProfileDrawer}

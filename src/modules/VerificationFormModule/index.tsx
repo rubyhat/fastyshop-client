@@ -1,0 +1,1 @@
+export { VerificationFormModule } from "./VerificationFormModule";

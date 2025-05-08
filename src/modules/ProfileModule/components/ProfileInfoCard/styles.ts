@@ -1,10 +1,13 @@
-export const profileInfoCardStyles = {
+export const profileInfoCardWrapperStyles = {
   p: 2,
   borderRadius: 2,
+};
+
+export const profileInfoCardStyles = {
   display: "flex",
   alignItems: "center",
-  gap: 2,
   cursor: "pointer",
+  gap: 2,
 };
 
 export const profileInfoCardAvatarStyles = {

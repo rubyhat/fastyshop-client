@@ -1,16 +1,16 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import { Box, Paper, Skeleton, Typography } from "@mui/material";
+
 import { useGetSellerProfileByUserIdQuery } from "../../../../shared/hooks";
 import { AxiosErrorAlertMessage } from "../../../../shared/components/AxiosErrorAlertMessage";
-import { useNavigate } from "react-router-dom";
 import { boxItemStyles, boxWrapperStyles } from "./styles";
-import React from "react";
 
 interface SellerProfileInfoProps {
   userId: string;
 }
 
 export const SellerProfileInfo = ({ userId }: SellerProfileInfoProps) => {
-  const navigate = useNavigate();
   const {
     data: dataSellerProfile,
     isLoading: isLoadingSellerProfile,
@@ -38,25 +38,43 @@ export const SellerProfileInfo = ({ userId }: SellerProfileInfoProps) => {
           </Typography>
         </Box>
         <Box sx={boxWrapperStyles}>
-          <Box
-            onClick={() => navigate("/shops")}
-            sx={boxItemStyles}
-            component={Paper}
-          >
-            <Typography component="p" variant="body2" fontWeight={700}>
-              Всего заказов
-            </Typography>
-            <Typography component="p" variant="body2">
-              1234
-            </Typography>
+          <Box sx={boxItemStyles} component={Paper}>
+            <Box component={Link} to="/shops">
+              <Typography
+                component="p"
+                variant="body2"
+                fontWeight={700}
+                color="customColors.labelsPrimary"
+              >
+                Всего заказов
+              </Typography>
+              <Typography
+                component="p"
+                variant="body2"
+                color="customColors.labelsPrimary"
+              >
+                1234
+              </Typography>
+            </Box>
           </Box>
           <Box sx={boxItemStyles} component={Paper}>
-            <Typography component="p" variant="body2" fontWeight={700}>
-              Покупателей
-            </Typography>
-            <Typography component="p" variant="body2">
-              123456
-            </Typography>
+            <Box component={Link} to="#">
+              <Typography
+                component="p"
+                variant="body2"
+                fontWeight={700}
+                color="customColors.labelsPrimary"
+              >
+                Покупателей
+              </Typography>
+              <Typography
+                component="p"
+                variant="body2"
+                color="customColors.labelsPrimary"
+              >
+                123456
+              </Typography>
+            </Box>
           </Box>
         </Box>
       </React.Fragment>

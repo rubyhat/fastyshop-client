@@ -1,4 +1,5 @@
 import { Box, Button, Paper, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export const SellerCreateProfileBlock = () => {
   return (
@@ -10,7 +11,14 @@ export const SellerCreateProfileBlock = () => {
         Чтобы создать магазин и начать продавать товары или услуги необходимо
         создать профиль продавца - это быстро :{")"}
       </Typography>
-      <Button variant="contained" color="success" fullWidth sx={{ mt: 2 }}>
+      <Button
+        component={Link}
+        to="/seller/create"
+        variant="contained"
+        color="success"
+        fullWidth
+        sx={{ mt: 2 }}
+      >
         Создать профиль
       </Button>
     </Box>

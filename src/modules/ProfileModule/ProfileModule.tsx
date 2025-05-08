@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { ProfileInfoCard } from "./components/ProfileInfoCard";
 import { ProfileFavoritesLinks } from "./components/ProfileFavoritesLinks";
@@ -17,7 +17,6 @@ const list = [
 
 export const ProfileModule = () => {
   const isAuthenticated = useIsAuthenticated();
-  const navigate = useNavigate();
   return (
     <React.Fragment>
       <BasicPageHeader
@@ -41,10 +40,11 @@ export const ProfileModule = () => {
                     Для этого необходимо войти в систему или создать аккаунт :)
                   </Typography>
                   <Button
+                    component={Link}
+                    to="/login"
                     variant="contained"
                     color="primary"
                     fullWidth
-                    onClick={() => navigate("/login")}
                   >
                     Войти/Создать аккаунт
                   </Button>

@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaUserAlt, FaHome, FaSearch, FaShoppingBasket } from "react-icons/fa";
 
 import {
@@ -19,7 +19,6 @@ import {
  * @returns React-компонент нижнего меню навигации.
  */
 export const BottomNavigationMenu = () => {
-  const navigate = useNavigate();
   const location = useLocation();
 
   // Функция для определения активного пути
@@ -27,7 +26,7 @@ export const BottomNavigationMenu = () => {
 
   return (
     <Box sx={bottomNavigationMenuStyles}>
-      <Box sx={menuItemStyles} onClick={() => navigate("/")}>
+      <Box sx={menuItemStyles} component={Link} to="/">
         <FaHome size={16} style={menuItemIconStyles(isActive("/"))} />
         <Typography
           component="p"
@@ -38,7 +37,7 @@ export const BottomNavigationMenu = () => {
         </Typography>
       </Box>
 
-      <Box sx={menuItemStyles} onClick={() => navigate("/catalog")}>
+      <Box sx={menuItemStyles} component={Link} to="/catalog">
         <FaSearch size={16} style={menuItemIconStyles(isActive("/catalog"))} />
         <Typography
           component="p"
@@ -49,7 +48,7 @@ export const BottomNavigationMenu = () => {
         </Typography>
       </Box>
 
-      <Box sx={menuItemStyles} onClick={() => navigate("/cart")}>
+      <Box sx={menuItemStyles} component={Link} to="/cart">
         <FaShoppingBasket
           size={16}
           style={menuItemIconStyles(isActive("/cart"))}
@@ -63,7 +62,7 @@ export const BottomNavigationMenu = () => {
         </Typography>
       </Box>
 
-      <Box sx={menuItemStyles} onClick={() => navigate("/profile")}>
+      <Box sx={menuItemStyles} component={Link} to="/profile">
         <FaUserAlt size={16} style={menuItemIconStyles(isActive("/profile"))} />
         <Typography
           component="p"

@@ -23,8 +23,8 @@ interface AxiosErrorAlertMessageProps {
 export const AxiosErrorAlertMessage = ({
   error,
 }: AxiosErrorAlertMessageProps) => {
-  const message = error.response?.data?.message || error.message;
-  const code = error.response?.data?.statusCode;
+  const message = error.response?.data?.error?.message || error.message;
+  const code = error.response?.data?.error?.code || 500;
 
   // todo: в будущем добавить какой-нибудь трекер ошибок на стороне клиента, например Sentry
   // eslint-disable-next-line no-console

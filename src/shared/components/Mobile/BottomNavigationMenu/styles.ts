@@ -22,6 +22,6 @@ export const menuItemIconStyles = (isActive: boolean) => {
 export const menuItemTextStyles = (isActive: boolean) => {
   return {
     transition: "color 333ms ease",
-    color: isActive ? "#1c1c1c" : "#cccccc",
+    color: isActive ? "customColors.labelsPrimary" : "#cccccc",
   };
 };

@@ -1,12 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Box, Button, Chip, Paper, Skeleton, Typography } from "@mui/material";
+
+import { useSellerStore } from "../../store";
+import { cardHeaderStyles, cardStyles, cardWrapperStyles } from "./styles";
 import { useGetAllShopsOfUser } from "../../../../shared/hooks";
 import { AxiosErrorAlertMessage } from "../../../../shared/components/AxiosErrorAlertMessage";
-import { cardHeaderStyles, cardStyles, cardWrapperStyles } from "./styles";
-import { useSellerStore } from "../../store";
 
 export const SellerShopsInfo = () => {
-  const navigate = useNavigate();
   const setShowCreateShopDrawer = useSellerStore(
     (state) => state.setShowCreateShopDrawer,
   );
@@ -31,15 +31,19 @@ export const SellerShopsInfo = () => {
         {dataShops.map((shop) => {
           const isShopActive = shop.is_active;
           return (
-            <Box
-              key={shop.id}
-              sx={cardStyles}
-              component={Paper}
-              onClick={() => navigate("/shops/" + shop.id)}
-            >
-              <Box sx={cardHeaderStyles}>
+            <Box key={shop.id} sx={cardStyles} component={Paper}>
+              <Box
+                sx={cardHeaderStyles}
+                component={Link}
+                to={"/shops/" + shop.id}
+              >
                 <Box>
-                  <Typography component="p" variant="body1" fontWeight={700}>
+                  <Typography
+                    component="p"
+                    variant="body1"
+                    fontWeight={700}
+                    color="customColors.labelsPrimary"
+                  >
                     {shop.title}
                   </Typography>
                   <Typography

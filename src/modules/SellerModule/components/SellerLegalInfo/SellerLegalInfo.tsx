@@ -112,7 +112,11 @@ export const SellerLegalInfo = () => {
   }
 
   if (isErrorLegalProfile && errorLegalProfile) {
-    return <AxiosErrorAlertMessage error={errorLegalProfile} />;
+    return (
+      <Box py={1}>
+        <AxiosErrorAlertMessage error={errorLegalProfile} />
+      </Box>
+    );
   }
 
   return null;

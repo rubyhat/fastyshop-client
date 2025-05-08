@@ -224,7 +224,7 @@ export const customTheme = createTheme(
 
         colorsAccentSecondary: "#BFB7D0",
 
-        labelsPrimary: "hsla(0, 0%, 0%, 1)",
+        labelsPrimary: "#1C1C1C",
         labelsSecondary: "hsla(240, 6%, 25%, 0.6)",
         labelsTertiary: "hsla(240, 6%, 25%, 0.3)",
         labelsQuaternary: "hsla(240, 6%, 25%, 0.18)",

@@ -9,4 +9,5 @@ export interface RequestResponseError {
   key: string;
   message: string;
   status: string;
+  details?: Record<string, string[]>;
 }

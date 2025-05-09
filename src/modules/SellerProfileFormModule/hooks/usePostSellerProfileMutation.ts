@@ -1,8 +1,8 @@
-import toast from "react-hot-toast";
 import { apiSellerProfileFormModule } from "../api";
 import { useAxiosMutation } from "../../../configs/useAxiosMutation";
 import { SellerProfileFormData } from "../validations/sellerProfileFormValidationSchema";
 import { SellerProfileResponseData } from "../../../shared/interfaces";
+import { showApiError } from "../../../shared/utils";
 
 interface SellerProfileMutationProps {
   onSuccessCallback?: (response: SellerProfileResponseData) => void;
@@ -19,10 +19,7 @@ export const usePostSellerProfileMutation = ({
       return response;
     },
     onError: (error) => {
-      toast.error(
-        "Произошла ошибка при создании профиля продавца: " +
-          error.response?.data.error.message,
-      );
+      showApiError(error);
       return error;
     },
   });

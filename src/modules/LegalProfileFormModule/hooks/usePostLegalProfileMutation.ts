@@ -1,4 +1,3 @@
-import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { apiLegalProfileFormModule } from "../api";
@@ -6,6 +5,7 @@ import { useAxiosMutation } from "../../../configs/useAxiosMutation";
 import { LegalProfileFormData } from "../validations/legalProfileFormValidationSchema";
 import { LegalProfileResponseData } from "../../../shared/interfaces";
 import { useUserProfile } from "../../../shared/permissions/hooks";
+import { showApiError } from "../../../shared/utils";
 
 interface LegalProfileMutationProps {
   onSuccessCallback?: (response: LegalProfileResponseData) => void;
@@ -27,10 +27,7 @@ export const usePostLegalProfileMutation = ({
       return response;
     },
     onError: (error) => {
-      toast.error(
-        "Произошла ошибка при сохранении юридического профиля: " +
-          error.response?.data.error.message,
-      );
+      showApiError(error);
       return error;
     },
   });

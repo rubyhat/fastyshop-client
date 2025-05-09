@@ -6,6 +6,7 @@ import { RegistrationFormData } from "../validations";
 import { useRegistrationStore } from "../store/useRegistrationStore";
 import { useLoginStore } from "../../LoginModule/store";
 import { useUserStore } from "../../UserModule/store";
+import { showApiError } from "../../../shared/utils";
 
 export const usePostNewUserMutation = () => {
   const navigate = useNavigate();
@@ -29,7 +30,8 @@ export const usePostNewUserMutation = () => {
       return response;
     },
     onError: (error) => {
-      toast.error("Произошла ошибка! " + error?.message);
+      showApiError(error);
+      return error;
     },
   });
 };

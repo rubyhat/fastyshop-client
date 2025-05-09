@@ -120,8 +120,8 @@ axiosBaseWrap.interceptors.response.use(
         break;
       case 500:
         throw error;
-      default:
-        toast.error("Произошла ошибка. Пожалуйста, попробуйте снова.");
+      // default:
+      //   toast.error("Произошла ошибка. Пожалуйста, попробуйте снова.");
     }
 
     return Promise.reject(error);

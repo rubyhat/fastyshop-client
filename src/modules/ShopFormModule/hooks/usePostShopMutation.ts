@@ -5,6 +5,7 @@ import { useAxiosMutation } from "../../../configs/useAxiosMutation";
 import { apiShopFormModule } from "../api/apiShopFormModule";
 import { ShopFormData } from "../validations";
 import { ShopData } from "../../../shared/interfaces/Shop";
+import { showApiError } from "../../../shared/utils";
 
 interface ShopMutationProps {
   onSuccessCallback?: (response: ShopData) => void;
@@ -29,7 +30,8 @@ export const usePostShopMutation = ({
       toast.success("Магазин успешно создан!");
     },
     onError: (error) => {
-      toast.error("Произошла ошибка: " + error.response?.data.message);
+      showApiError(error);
+      return error;
     },
   });
 };

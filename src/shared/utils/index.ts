@@ -9,5 +9,8 @@ export * from "./formatDateTime";
 // Basic text
 export * from "./displayUserName";
 
+// Basic api's
+export * from "./showApiError";
+
 // dev utils
 export * from "./devLogger";

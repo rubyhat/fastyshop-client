@@ -5,6 +5,7 @@ import { useAxiosMutation } from "../../../configs/useAxiosMutation";
 import { apiLoginModule } from "../api";
 import { LoginFormDataTypes } from "../validations";
 import { useLoginStore } from "../store";
+import { showApiError } from "../../../shared/utils";
 
 /**
  * Хук для выполнения авторизации пользователя.
@@ -56,7 +57,8 @@ export const useLoginMutation = () => {
     onError: (error) => {
       // eslint-disable-next-line no-console
       console.error("Ошибка авторизации:", error);
-      toast.error("Ошибка входа. Проверьте логин и пароль.");
+      showApiError(error);
+      return error;
     },
   });
 };

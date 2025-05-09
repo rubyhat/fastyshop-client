@@ -6,6 +6,7 @@ import { LegalProfileFormData } from "../validations";
 import { useAxiosMutation } from "../../../configs/useAxiosMutation";
 import { useUserProfile } from "../../../shared/permissions/hooks";
 import { LegalProfileResponseData } from "../../../shared/interfaces";
+import { showApiError } from "../../../shared/utils";
 
 interface LegalProfileMutationProps {
   onSuccessCallback?: (response: LegalProfileResponseData) => void;
@@ -24,13 +25,11 @@ export const usePatchLegalProfileMutation = ({
       queryClient.invalidateQueries({
         queryKey: ["get-all-legal-profiles-of-user", profile?.id],
       });
+      toast.success("Данные успешно обновлены!");
       return response;
     },
     onError: (error) => {
-      toast.error(
-        "Произошла ошибка при сохранении юридического профиля: " +
-          error.response?.data.error.message,
-      );
+      showApiError(error);
       return error;
     },
   });

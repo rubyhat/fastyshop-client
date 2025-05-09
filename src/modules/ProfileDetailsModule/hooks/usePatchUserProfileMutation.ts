@@ -4,6 +4,7 @@ import { useAxiosMutation } from "../../../configs/useAxiosMutation";
 import { useUserStore } from "../../UserModule/store";
 
 import { User } from "../../../shared/interfaces";
+import { showApiError } from "../../../shared/utils";
 
 interface MutationProps {
   id: string;
@@ -20,8 +21,8 @@ export const usePatchUserProfileMutation = () => {
       setUserProfile(response);
       return response;
     },
-    onError: () => {
-      toast.error("Не удалось обновить данные, пожалуйста, попробуйте позже!");
+    onError: (error) => {
+      showApiError(error);
     },
   });
 };

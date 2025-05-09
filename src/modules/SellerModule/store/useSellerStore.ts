@@ -1,8 +1,15 @@
 import { create } from "zustand";
+import { LegalProfileResponseData } from "../../../shared/interfaces";
 
 interface SellerStore {
-  showCreateLegalProfileDrawer: boolean;
-  setShowCreateLegalProfileDrawer: (v: boolean) => void;
+  legalFormMode: "create" | "update";
+  setLegalFormMode: (v: "create" | "update") => void;
+
+  editingLegalProfile: LegalProfileResponseData | null;
+  setEditingLegalProfile: (v: LegalProfileResponseData | null) => void;
+
+  showLegalProfileFormDrawer: boolean;
+  setShowLegalProfileFormDrawer: (v: boolean) => void;
 
   showCreateShopDrawer: boolean;
   setShowCreateShopDrawer: (v: boolean) => void;
@@ -12,9 +19,14 @@ interface SellerStore {
 }
 
 export const useSellerStore = create<SellerStore>((set) => ({
-  showCreateLegalProfileDrawer: false,
-  setShowCreateLegalProfileDrawer: (v) =>
-    set({ showCreateLegalProfileDrawer: v }),
+  legalFormMode: "create",
+  setLegalFormMode: (v) => set({ legalFormMode: v }),
+
+  editingLegalProfile: null,
+  setEditingLegalProfile: (v) => set({ editingLegalProfile: v }),
+
+  showLegalProfileFormDrawer: false,
+  setShowLegalProfileFormDrawer: (v) => set({ showLegalProfileFormDrawer: v }),
 
   showCreateShopDrawer: false,
   setShowCreateShopDrawer: (v) => set({ showCreateShopDrawer: v }),

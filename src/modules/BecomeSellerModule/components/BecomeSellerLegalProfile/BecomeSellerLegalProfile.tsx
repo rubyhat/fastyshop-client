@@ -34,6 +34,7 @@ export const BecomeSellerLegalProfile = () => {
         <LegalProfileFormModule
           onClickReturnButton={() => setStep(1)}
           onSuccessCallback={handleSuccessLegalProfileReq}
+          mode="create"
         />
       </Box>
     </Box>

@@ -1,1 +1,0 @@
-export { CreateLegalProfileDrawer } from "./CreateLegalProfileDrawer";

@@ -35,8 +35,8 @@ export const ShopFormModule = ({
 }: ShopFormModuleProps) => {
   const profile = useUserProfile();
   const isSeller = useIsSeller();
-  const setShowCreateLegalProfileDrawer = useBecomeSellerStore(
-    (state) => state.setShowCreateLegalProfileDrawer,
+  const setShowLegalProfileFormDrawer = useBecomeSellerStore(
+    (state) => state.setShowLegalProfileFormDrawer,
   );
   const sellerProfileId = useBecomeSellerStore(
     (state) => state.sellerProfileId,
@@ -175,7 +175,7 @@ export const ShopFormModule = ({
                 })}
                 buttonOptions={{
                   buttonLabel: "+ Создать новый",
-                  onButtonClick: () => setShowCreateLegalProfileDrawer(true),
+                  onButtonClick: () => setShowLegalProfileFormDrawer(true),
                 }}
                 disabled={false}
               />

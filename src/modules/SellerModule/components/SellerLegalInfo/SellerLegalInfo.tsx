@@ -13,11 +13,19 @@ import { useSellerStore } from "../../store";
 import { useGetAllLegalProfilesOfUserQuery } from "../../hooks";
 import { cardHeaderStyles, cardStyles, cardWrapperStyles } from "./styles";
 import { AxiosErrorAlertMessage } from "../../../../shared/components/AxiosErrorAlertMessage";
-import { LegalForm, LegalFormDisplayText } from "../../../../shared/interfaces";
+import {
+  LegalForm,
+  LegalFormDisplayText,
+  LegalProfileResponseData,
+} from "../../../../shared/interfaces";
 
 export const SellerLegalInfo = () => {
-  const setShowCreateLegalProfileDrawer = useSellerStore(
-    (state) => state.setShowCreateLegalProfileDrawer,
+  const setLegalFormMode = useSellerStore((state) => state.setLegalFormMode);
+  const setEditingLegalProfile = useSellerStore(
+    (state) => state.setEditingLegalProfile,
+  );
+  const setShowLegalProfileFormDrawer = useSellerStore(
+    (state) => state.setShowLegalProfileFormDrawer,
   );
   const setShowVerificationDrawer = useSellerStore(
     (state) => state.setShowVerificationDrawer,
@@ -43,6 +51,18 @@ export const SellerLegalInfo = () => {
     }
   };
 
+  const handleClickCreateNewButton = () => {
+    setLegalFormMode("create");
+    setEditingLegalProfile(null);
+    setShowLegalProfileFormDrawer(true);
+  };
+
+  const handleClickLegalCard = (editingItem: LegalProfileResponseData) => {
+    setEditingLegalProfile(editingItem);
+    setLegalFormMode("update");
+    setShowLegalProfileFormDrawer(true);
+  };
+
   if (isLoadingLegalProfile) {
     return (
       <Skeleton variant="rounded" width="100%" height={166} sx={{ mt: 1 }} />
@@ -55,7 +75,12 @@ export const SellerLegalInfo = () => {
         {dataLegalProfile.map((profile) => {
           const isVerified = profile.is_verified;
           return (
-            <Box key={profile.id} sx={cardStyles} component={Paper}>
+            <Box
+              key={profile.id}
+              sx={cardStyles}
+              component={Paper}
+              onClick={() => handleClickLegalCard(profile)}
+            >
               <Box sx={cardHeaderStyles}>
                 <Box>
                   <Typography component="p" variant="body1" fontWeight={700}>
@@ -103,7 +128,7 @@ export const SellerLegalInfo = () => {
         <Button
           variant="outlined"
           color="success"
-          onClick={() => setShowCreateLegalProfileDrawer(true)}
+          onClick={handleClickCreateNewButton}
         >
           + Создать новый
         </Button>

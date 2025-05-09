@@ -31,7 +31,7 @@ export const CreateShopDrawer = ({
       isOpen={isOpen}
       setIsOpen={setIsOpen}
     >
-      <Box px={2}>
+      <Box px={2} pb={2} height={1}>
         <ShopFormModule
           onClickReturnButton={handleClickReturnButton}
           onSuccessCallback={handleSuccessCallBack}

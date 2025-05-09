@@ -6,12 +6,19 @@ import { useBecomeSellerStore } from "./store";
 import { BecomeSellerProfile } from "./components/BecomeSellerProfile";
 import { BecomeSellerLegalProfile } from "./components/BecomeSellerLegalProfile";
 import { BecomeSellerShop } from "./components/BecomeSellerShop";
-import { BecomeSellerCreateLegalProfileDrawer } from "./components/BecomeSellerCreateLegalProfileDrawer";
 import { useIsSeller } from "../../shared/permissions/hooks";
+import { LegalProfileFormDrawer } from "../../shared/components/LegalProfileFormDrawer";
 
 export const BecomeSellerModule = () => {
   const step = useBecomeSellerStore((state) => state.step);
   const isSeller = useIsSeller();
+
+  const showLegalProfileFormDrawer = useBecomeSellerStore(
+    (state) => state.showLegalProfileFormDrawer,
+  );
+  const setShowLegalProfileFormDrawer = useBecomeSellerStore(
+    (state) => state.setShowLegalProfileFormDrawer,
+  );
 
   return (
     <React.Fragment>
@@ -35,7 +42,11 @@ export const BecomeSellerModule = () => {
           )}
         </Grid>
       </Container>
-      <BecomeSellerCreateLegalProfileDrawer />
+      <LegalProfileFormDrawer
+        mode="create"
+        isOpen={showLegalProfileFormDrawer}
+        setIsOpen={setShowLegalProfileFormDrawer}
+      />
     </React.Fragment>
   );
 };

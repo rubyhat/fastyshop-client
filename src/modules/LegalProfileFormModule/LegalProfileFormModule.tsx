@@ -1,3 +1,5 @@
+import React from "react";
+import toast from "react-hot-toast";
 import { Alert, Box, Button } from "@mui/material";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
@@ -6,7 +8,10 @@ import {
   LegalProfileFormData,
   legalProfileFormValidationSchema,
 } from "./validations";
-import { usePostLegalProfileMutation } from "./hooks";
+import {
+  usePatchLegalProfileMutation,
+  usePostLegalProfileMutation,
+} from "./hooks";
 
 import { devLogger } from "../../shared/utils";
 import { BasicFormSelectField } from "../../shared/components/BasicFormSelectField";
@@ -18,12 +23,16 @@ import {
 } from "../../shared/constants";
 
 interface LegalProfileFormModuleProps {
+  mode: "create" | "update";
+  editingProfile?: LegalProfileResponseData | null;
   submitButtonLabel?: string;
   onClickReturnButton: () => void;
   onSuccessCallback?: (response: LegalProfileResponseData) => void;
 }
 
 export const LegalProfileFormModule = ({
+  mode,
+  editingProfile,
   submitButtonLabel = "Продолжить",
   onClickReturnButton,
   onSuccessCallback,
@@ -42,12 +51,43 @@ export const LegalProfileFormModule = ({
   const { handleSubmit, reset, watch } = methods;
   const legalForm = watch("legal_form");
 
-  const legalProfileMutation = usePostLegalProfileMutation({
+  React.useEffect(() => {
+    if (mode === "update" && editingProfile) {
+      reset({
+        company_name: editingProfile.company_name,
+        tax_id: editingProfile.tax_id,
+        country_code: editingProfile.country_code,
+        legal_form: editingProfile.legal_form,
+        legal_address: editingProfile.legal_address,
+      });
+    }
+  }, [mode, editingProfile, reset]);
+
+  const createLegalProfileMutation = usePostLegalProfileMutation({
     onSuccessCallback,
   });
 
+  const patchLegalProfileMutation = usePatchLegalProfileMutation({
+    onSuccessCallback,
+  });
+
+  const isFormDisabled =
+    createLegalProfileMutation.isPending || patchLegalProfileMutation.isPending;
+
   const onSubmit = (data: LegalProfileFormData) => {
-    legalProfileMutation.mutate(data);
+    if (mode === "update" && !editingProfile) {
+      toast.error(
+        "Профиль для редактирования не найден, обновите страницу и попробуйте еще раз",
+      );
+    }
+
+    if (mode === "create") {
+      createLegalProfileMutation.mutate(data);
+    }
+
+    if (mode === "update" && editingProfile) {
+      patchLegalProfileMutation.mutate({ data, id: editingProfile.id });
+    }
   };
 
   const handleResetForm = () => {
@@ -93,7 +133,7 @@ export const LegalProfileFormModule = ({
               name="company_name"
               label="Название компании"
               placeholder="Введите название компании"
-              disabled={legalProfileMutation.isPending}
+              disabled={isFormDisabled}
             />
           </Box>
           <Box pb={2}>
@@ -109,7 +149,7 @@ export const LegalProfileFormModule = ({
                   ? "Введите ИИН"
                   : "Введите БИН"
               }
-              disabled={legalProfileMutation.isPending}
+              disabled={isFormDisabled}
             />
           </Box>
           <Box pb={2}>
@@ -119,7 +159,7 @@ export const LegalProfileFormModule = ({
               placeholder="Казахстан, г. Астана, ул. Гоголя 123, офис 42"
               multiline
               minRows={4}
-              disabled={legalProfileMutation.isPending}
+              disabled={isFormDisabled}
             />
           </Box>
         </Box>
@@ -128,7 +168,7 @@ export const LegalProfileFormModule = ({
             variant="contained"
             color="secondary"
             onClick={handleResetForm}
-            disabled={legalProfileMutation.isPending}
+            disabled={isFormDisabled}
           >
             Назад
           </Button>
@@ -136,7 +176,7 @@ export const LegalProfileFormModule = ({
             variant="contained"
             color="primary"
             type="submit"
-            disabled={legalProfileMutation.isPending}
+            disabled={isFormDisabled}
           >
             {submitButtonLabel}
           </Button>

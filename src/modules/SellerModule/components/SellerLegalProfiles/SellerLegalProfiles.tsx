@@ -1,15 +1,20 @@
 import { Box, Typography } from "@mui/material";
-import { SellerLegalInfo } from "../SellerLegalInfo";
-import { CreateLegalProfileDrawer } from "../../../../shared/components/CreateLegalProfileDrawer";
 import { useSellerStore } from "../../store";
+import { SellerLegalInfo } from "../SellerLegalInfo";
+import { LegalProfileFormDrawer } from "../../../../shared/components/LegalProfileFormDrawer";
 import { CreateVerificationDrawer } from "../../../../shared/components/CreateVerificationDrawer";
 
 export const SellerLegalProfiles = () => {
-  const showCreateLegalProfileDrawer = useSellerStore(
-    (state) => state.showCreateLegalProfileDrawer,
+  const legalFormMode = useSellerStore((state) => state.legalFormMode);
+  const editingLegalProfile = useSellerStore(
+    (state) => state.editingLegalProfile,
   );
-  const setShowCreateLegalProfileDrawer = useSellerStore(
-    (state) => state.setShowCreateLegalProfileDrawer,
+
+  const showLegalProfileFormDrawer = useSellerStore(
+    (state) => state.showLegalProfileFormDrawer,
+  );
+  const setShowLegalProfileFormDrawer = useSellerStore(
+    (state) => state.setShowLegalProfileFormDrawer,
   );
 
   const showVerificationDrawer = useSellerStore(
@@ -36,9 +41,11 @@ export const SellerLegalProfiles = () => {
         isOpen={showVerificationDrawer}
         setIsOpen={setShowVerificationDrawer}
       />
-      <CreateLegalProfileDrawer
-        isOpen={showCreateLegalProfileDrawer}
-        setIsOpen={setShowCreateLegalProfileDrawer}
+      <LegalProfileFormDrawer
+        editingProfile={editingLegalProfile}
+        mode={legalFormMode}
+        isOpen={showLegalProfileFormDrawer}
+        setIsOpen={setShowLegalProfileFormDrawer}
       />
     </Box>
   );

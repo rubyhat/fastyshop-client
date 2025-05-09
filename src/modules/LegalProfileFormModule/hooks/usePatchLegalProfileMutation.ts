@@ -2,23 +2,23 @@ import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { apiLegalProfileFormModule } from "../api";
+import { LegalProfileFormData } from "../validations";
 import { useAxiosMutation } from "../../../configs/useAxiosMutation";
-import { LegalProfileFormData } from "../validations/legalProfileFormValidationSchema";
-import { LegalProfileResponseData } from "../../../shared/interfaces";
 import { useUserProfile } from "../../../shared/permissions/hooks";
+import { LegalProfileResponseData } from "../../../shared/interfaces";
 
 interface LegalProfileMutationProps {
   onSuccessCallback?: (response: LegalProfileResponseData) => void;
 }
 
-export const usePostLegalProfileMutation = ({
+export const usePatchLegalProfileMutation = ({
   onSuccessCallback,
 }: LegalProfileMutationProps) => {
   const queryClient = useQueryClient();
   const profile = useUserProfile();
   return useAxiosMutation({
-    mutationFn: (data: LegalProfileFormData) =>
-      apiLegalProfileFormModule.postLegalProfile(data),
+    mutationFn: ({ data, id }: { data: LegalProfileFormData; id: string }) =>
+      apiLegalProfileFormModule.patchLegalProfile(data, id),
     onSuccess: (response) => {
       if (onSuccessCallback) onSuccessCallback(response);
       queryClient.invalidateQueries({

@@ -1,1 +1,0 @@
-export { BecomeSellerCreateLegalProfileDrawer } from "./BecomeSellerCreateLegalProfileDrawer";

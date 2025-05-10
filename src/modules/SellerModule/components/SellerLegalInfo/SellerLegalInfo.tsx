@@ -41,13 +41,16 @@ export const SellerLegalInfo = () => {
 
   const handleClickVerificationIcon = (
     event: React.MouseEvent<HTMLButtonElement>,
-    isVerified: boolean,
+    editingItem: LegalProfileResponseData,
   ) => {
-    event.preventDefault();
-    if (isVerified) {
+    event.stopPropagation();
+    if (editingItem?.is_verified) {
       toast.success("Верификация была успешно пройдена!");
+      return;
     } else {
+      setEditingLegalProfile(editingItem);
       setShowVerificationDrawer(true);
+      return;
     }
   };
 
@@ -97,7 +100,7 @@ export const SellerLegalInfo = () => {
                 <IconButton
                   size="small"
                   color={isVerified ? "success" : "default"}
-                  onClick={(e) => handleClickVerificationIcon(e, isVerified)}
+                  onClick={(e) => handleClickVerificationIcon(e, profile)}
                 >
                   <FaRegCircleCheck size={14} />
                 </IconButton>

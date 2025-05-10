@@ -8,6 +8,7 @@ import {
   VerificationFormData,
   verificationFormValidationSchema,
 } from "./validations";
+import { useSellerStore } from "../SellerModule/store";
 
 interface VerificationFormModuleProps {
   submitButtonLabel?: string;
@@ -20,6 +21,12 @@ export const VerificationFormModule = ({
   onSuccessCallback,
   onClickReturnButton,
 }: VerificationFormModuleProps) => {
+  const editingLegalProfile = useSellerStore(
+    (state) => state.editingLegalProfile,
+  );
+
+  devLogger.log(editingLegalProfile); // todo: temp, remove after tests
+
   const methods = useForm<VerificationFormData>({
     resolver: zodResolver(verificationFormValidationSchema),
     defaultValues: {

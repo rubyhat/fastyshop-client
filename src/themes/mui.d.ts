@@ -145,6 +145,10 @@ declare module "@mui/material/styles" {
 
     colorsAccentSecondary;
 
+    // todo: заменить цвета в теме MUI
+    colorsSuccess: string;
+    colorsError: string;
+
     labelsPrimary: string;
     labelsSecondary: string;
     labelsTertiary: string;

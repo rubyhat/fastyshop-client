@@ -1,9 +1,9 @@
 import toast from "react-hot-toast";
 import { Box, Button, Typography } from "@mui/material";
-import { FaRegCircleCheck } from "react-icons/fa6";
 
-import { VerificationFormModule } from "../../../modules/VerificationFormModule";
 import { BasicDrawer } from "../BasicDrawer";
+import { VerificationBadge } from "../VerificationBadge";
+import { VerificationFormModule } from "../../../modules/VerificationFormModule";
 
 interface CreateVerificationDrawerProps {
   isOpen: boolean;
@@ -29,7 +29,7 @@ export const CreateVerificationDrawer = ({
 
   const handleSuccessCallBack = () => {
     setIsOpen(false);
-    toast.success("Заявка на верификацию успешно отправлена!!");
+    toast.success("Заявка на верификацию успешно отправлена!");
   };
 
   return (
@@ -62,24 +62,7 @@ export const CreateVerificationDrawer = ({
             <Typography component="p" variant="body2" pb={2}>
               После успешного прохождения верификации, вы получите бейдж:
             </Typography>
-            <Box
-              sx={{
-                width: "fit-content",
-                display: "flex",
-                alignItems: "center",
-                gap: 1,
-                border: "1px solid",
-                borderColor: "green",
-                py: 0.5,
-                px: 1.5,
-                borderRadius: 2,
-              }}
-            >
-              <FaRegCircleCheck color="green" />
-              <Typography component="p" variant="body2" color="success">
-                Верифицированный магазин
-              </Typography>
-            </Box>
+            <VerificationBadge is_verified />
           </Box>
           <Box>
             <Button

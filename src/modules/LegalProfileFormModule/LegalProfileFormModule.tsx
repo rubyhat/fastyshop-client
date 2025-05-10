@@ -21,6 +21,8 @@ import {
   countrySelectOptions,
   legalFormSelectOptions,
 } from "../../shared/constants";
+import { VerificationBadge } from "../../shared/components/VerificationBadge";
+import { useSellerStore } from "../SellerModule/store";
 
 interface LegalProfileFormModuleProps {
   mode: "create" | "update";
@@ -37,6 +39,10 @@ export const LegalProfileFormModule = ({
   onClickReturnButton,
   onSuccessCallback,
 }: LegalProfileFormModuleProps) => {
+  const setShowVerificationDrawer = useSellerStore(
+    (state) => state.setShowVerificationDrawer,
+  );
+
   const methods = useForm<LegalProfileFormData>({
     resolver: zodResolver(legalProfileFormValidationSchema),
     defaultValues: {
@@ -93,6 +99,16 @@ export const LegalProfileFormModule = ({
   const handleResetForm = () => {
     reset();
     onClickReturnButton();
+  };
+
+  const handleClickVerificationIcon = () => {
+    if (!editingProfile?.is_verified) {
+      toast.success("Верификация была успешно пройдена!");
+      return;
+    } else {
+      setShowVerificationDrawer(true);
+      return;
+    }
   };
 
   return (
@@ -160,6 +176,11 @@ export const LegalProfileFormModule = ({
               multiline
               minRows={4}
               disabled={isFormDisabled}
+            />
+          </Box>
+          <Box onClick={() => handleClickVerificationIcon()}>
+            <VerificationBadge
+              is_verified={Boolean(editingProfile?.is_verified)}
             />
           </Box>
         </Box>

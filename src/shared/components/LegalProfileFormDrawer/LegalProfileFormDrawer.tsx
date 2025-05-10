@@ -24,7 +24,14 @@ export const LegalProfileFormDrawer = ({
 
   const handleSuccessCallBack = () => {
     setIsOpen(false);
-    toast.success("Новый юридический профиль успешно создан!");
+
+    if (mode === "create") {
+      toast.success("Новый юридический профиль успешно создан!");
+    }
+
+    if (mode === "update") {
+      toast.success("Юридический профиль успешно обновлен!");
+    }
   };
 
   const drawerTitle = {

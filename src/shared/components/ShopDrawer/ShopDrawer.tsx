@@ -5,15 +5,19 @@ import { ShopFormModule } from "../../../modules/ShopFormModule";
 import { useNavigate } from "react-router-dom";
 import { ShopData } from "../../interfaces/Shop";
 
-interface CreateShopDrawerProps {
+interface ShopDrawerProps {
   isOpen: boolean;
   setIsOpen: (v: boolean) => void;
+  mode: "create" | "update";
+  editingShop?: ShopData | null;
 }
 
-export const CreateShopDrawer = ({
+export const ShopDrawer = ({
+  mode = "create",
+  editingShop = null,
   isOpen,
   setIsOpen,
-}: CreateShopDrawerProps) => {
+}: ShopDrawerProps) => {
   const navigate = useNavigate();
   const handleClickReturnButton = () => {
     setIsOpen(false);
@@ -22,12 +26,23 @@ export const CreateShopDrawer = ({
   const handleSuccessCallBack = (response: ShopData) => {
     setIsOpen(false);
     navigate("/shops/" + response.id);
-    toast.success("Новый магазин успешно создан!");
+    if (mode === "create") {
+      toast.success("Новый магазин успешно создан!");
+    }
+
+    if (mode === "update") {
+      toast.success("Магазин успешно обновлен!");
+    }
+  };
+
+  const drawerTitle = {
+    create: "Создание магазина",
+    update: "Редактирование магазина",
   };
 
   return (
     <BasicDrawer
-      title="Создание магазина"
+      title={drawerTitle[mode]}
       isOpen={isOpen}
       setIsOpen={setIsOpen}
     >
@@ -35,6 +50,8 @@ export const CreateShopDrawer = ({
         <ShopFormModule
           onClickReturnButton={handleClickReturnButton}
           onSuccessCallback={handleSuccessCallBack}
+          mode={mode}
+          editingShop={editingShop}
         />
       </Box>
     </BasicDrawer>

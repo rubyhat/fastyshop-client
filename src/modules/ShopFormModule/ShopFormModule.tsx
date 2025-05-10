@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { ShopFormData, shopFormValidationsSchema } from "./validations";
 import { useBecomeSellerStore } from "../BecomeSellerModule/store";
-import { usePostShopMutation } from "./hooks/usePostShopMutation";
+import { usePatchShopMutation, usePostShopMutation } from "./hooks";
 
 import { devLogger } from "../../shared/utils";
 import { BasicFormSelectField } from "../../shared/components/BasicFormSelectField";
@@ -23,13 +23,18 @@ import {
   useGetSellerProfileByUserIdQuery,
 } from "../../shared/hooks";
 import { useIsSeller, useUserProfile } from "../../shared/permissions/hooks";
+import toast from "react-hot-toast";
 
 interface ShopFormModuleProps {
+  mode: "create" | "update";
+  editingShop?: ShopData | null;
   onClickReturnButton: () => void;
   onSuccessCallback?: (response: ShopData) => void;
 }
 
 export const ShopFormModule = ({
+  mode = "create",
+  editingShop = null,
   onClickReturnButton,
   onSuccessCallback,
 }: ShopFormModuleProps) => {
@@ -78,6 +83,21 @@ export const ShopFormModule = ({
   const shop_type = watch("shop_type") as ShopType;
 
   React.useEffect(() => {
+    if (mode === "update" && editingShop) {
+      reset({
+        title: editingShop.title,
+        contact_phone: editingShop.contact_phone,
+        contact_email: editingShop.contact_email,
+        physical_address: editingShop.physical_address,
+        shop_type: editingShop.shop_type,
+        shop_category_id: editingShop.shop_category.id,
+        legal_profile_id: editingShop.legal_profile.id,
+        seller_profile_id: editingShop.seller_profile.id,
+      });
+    }
+  }, [mode, editingShop, reset]);
+
+  React.useEffect(() => {
     if (sellerProfileId) {
       setValue("seller_profile_id", sellerProfileId);
     } else if (dataSellerProfileByUserId) {
@@ -89,12 +109,25 @@ export const ShopFormModule = ({
     }
   }, [dataSellerProfileByUserId, legalProfileId, sellerProfileId, setValue]);
 
-  const shopMutation = usePostShopMutation({
+  const createShopMutation = usePostShopMutation({
+    onSuccessCallback,
+  });
+  const patchShopMutation = usePatchShopMutation({
     onSuccessCallback,
   });
 
   const onSubmit = (data: ShopFormData) => {
-    shopMutation.mutate(data);
+    if (mode === "update" && !editingShop) {
+      toast.error(
+        "Магазин для редактирования не найден, обновите страницу и попробуйте еще раз",
+      );
+      return;
+    }
+
+    if (mode === "create") createShopMutation.mutate(data);
+
+    if (mode === "update" && editingShop)
+      patchShopMutation.mutate({ data, id: editingShop.id });
   };
 
   const handleResetForm = () => {

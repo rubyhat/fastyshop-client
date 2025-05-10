@@ -7,9 +7,7 @@ import { useGetAllShopsOfUser } from "../../../../shared/hooks";
 import { AxiosErrorAlertMessage } from "../../../../shared/components/AxiosErrorAlertMessage";
 
 export const SellerShopsInfo = () => {
-  const setShowCreateShopDrawer = useSellerStore(
-    (state) => state.setShowCreateShopDrawer,
-  );
+  const setShowShopDrawer = useSellerStore((state) => state.setShowShopDrawer);
 
   const {
     data: dataShops,
@@ -70,7 +68,7 @@ export const SellerShopsInfo = () => {
         <Button
           variant="outlined"
           color="success"
-          onClick={() => setShowCreateShopDrawer(true)}
+          onClick={() => setShowShopDrawer(true)}
         >
           + Создать новый
         </Button>

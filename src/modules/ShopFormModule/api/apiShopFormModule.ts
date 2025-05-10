@@ -11,4 +11,12 @@ export const apiShopFormModule = {
         throw error;
       });
   },
+  patchShop(data: Partial<ShopFormData>, id: string): Promise<ShopData> {
+    return axiosBaseWrap
+      .patch("/shops/" + id, data)
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
+  },
 };

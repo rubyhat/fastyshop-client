@@ -1,4 +1,3 @@
-import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { apiLegalProfileFormModule } from "../api";
@@ -25,7 +24,6 @@ export const usePatchLegalProfileMutation = ({
       queryClient.invalidateQueries({
         queryKey: ["get-all-legal-profiles-of-user", profile?.id],
       });
-      toast.success("Данные успешно обновлены!");
       return response;
     },
     onError: (error) => {

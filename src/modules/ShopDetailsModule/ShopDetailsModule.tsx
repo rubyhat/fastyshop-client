@@ -1,14 +1,25 @@
+import React from "react";
 import { useParams } from "react-router-dom";
 import { Box, Container, Grid, Skeleton } from "@mui/material";
 
+import { useShopDetailsStore } from "./store";
+import { ShopHeader } from "./components/ShopHeader";
 import { useGetShopDetailsById } from "../../shared/hooks";
 import { AxiosErrorAlertMessage } from "../../shared/components/AxiosErrorAlertMessage";
-import { ShopHeader } from "./components/ShopHeader";
-import React from "react";
 import { BasicPageHeader } from "../../shared/components/Mobile/BasicPageHeader";
+import { ShopDrawer } from "../../shared/components/ShopDrawer";
 
 export const ShopDetailsModule = () => {
   const { id } = useParams();
+  const showShopSettingsDrawer = useShopDetailsStore(
+    (state) => state.showShopSettingsDrawer,
+  );
+  const setShowShopSettingsDrawer = useShopDetailsStore(
+    (state) => state.setShowShopSettingsDrawer,
+  );
+
+  const editingShop = useShopDetailsStore((state) => state.editingShop);
+
   const {
     data: dataShop,
     isLoading: isLoadingShop,
@@ -40,6 +51,12 @@ export const ShopDetailsModule = () => {
             </Grid>
           </Grid>
         </Container>
+        <ShopDrawer
+          mode="update"
+          isOpen={showShopSettingsDrawer}
+          setIsOpen={setShowShopSettingsDrawer}
+          editingShop={editingShop}
+        />
       </React.Fragment>
     );
   }

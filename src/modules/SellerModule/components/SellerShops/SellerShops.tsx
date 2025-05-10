@@ -1,15 +1,11 @@
 import { Box, Typography } from "@mui/material";
 import { SellerShopsInfo } from "../SellerShopsInfo";
 import { useSellerStore } from "../../store";
-import { CreateShopDrawer } from "../../../../shared/components/CreateShopDrawer";
+import { ShopDrawer } from "../../../../shared/components/ShopDrawer";
 
 export const SellerShops = () => {
-  const showCreateShopDrawer = useSellerStore(
-    (state) => state.showCreateShopDrawer,
-  );
-  const setShowCreateShopDrawer = useSellerStore(
-    (state) => state.setShowCreateShopDrawer,
-  );
+  const showShopDrawer = useSellerStore((state) => state.showShopDrawer);
+  const setShowShopDrawer = useSellerStore((state) => state.setShowShopDrawer);
 
   return (
     <Box>
@@ -24,9 +20,11 @@ export const SellerShops = () => {
         Ваши созданные магазины
       </Typography>
       <SellerShopsInfo />
-      <CreateShopDrawer
-        isOpen={showCreateShopDrawer}
-        setIsOpen={setShowCreateShopDrawer}
+      <ShopDrawer
+        mode="create"
+        isOpen={showShopDrawer}
+        setIsOpen={setShowShopDrawer}
+        editingShop={null}
       />
     </Box>
   );

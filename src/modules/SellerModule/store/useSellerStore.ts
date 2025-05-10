@@ -11,8 +11,8 @@ interface SellerStore {
   showLegalProfileFormDrawer: boolean;
   setShowLegalProfileFormDrawer: (v: boolean) => void;
 
-  showCreateShopDrawer: boolean;
-  setShowCreateShopDrawer: (v: boolean) => void;
+  showShopDrawer: boolean;
+  setShowShopDrawer: (v: boolean) => void;
 
   showVerificationDrawer: boolean;
   setShowVerificationDrawer: (v: boolean) => void;
@@ -28,8 +28,8 @@ export const useSellerStore = create<SellerStore>((set) => ({
   showLegalProfileFormDrawer: false,
   setShowLegalProfileFormDrawer: (v) => set({ showLegalProfileFormDrawer: v }),
 
-  showCreateShopDrawer: false,
-  setShowCreateShopDrawer: (v) => set({ showCreateShopDrawer: v }),
+  showShopDrawer: false,
+  setShowShopDrawer: (v) => set({ showShopDrawer: v }),
 
   showVerificationDrawer: false,
   setShowVerificationDrawer: (v) => set({ showVerificationDrawer: v }),

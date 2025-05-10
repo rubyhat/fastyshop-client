@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Box, Paper, Typography } from "@mui/material";
 
@@ -19,6 +20,7 @@ export const BecomeSellerShop = ({
   const handleSuccessCallBack = (response: ShopData) => {
     navigate("/shops/" + response.id);
     resetForm();
+    toast.success("Новый магазин успешно создан!");
   };
 
   const handleClickReturnButton = () => {
@@ -39,6 +41,8 @@ export const BecomeSellerShop = ({
           Настройки будущего магазина
         </Typography>
         <ShopFormModule
+          mode="create"
+          editingShop={null}
           onClickReturnButton={handleClickReturnButton}
           onSuccessCallback={handleSuccessCallBack}
         />

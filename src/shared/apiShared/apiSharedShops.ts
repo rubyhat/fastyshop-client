@@ -18,4 +18,12 @@ export const apiSharedShops = {
         throw error;
       });
   },
+  getShopDetailsById(id: string): Promise<ShopData> {
+    return axiosBaseWrap
+      .get("/shops/" + id)
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
+  },
 };

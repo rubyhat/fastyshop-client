@@ -12,6 +12,8 @@ const ShopDetails = React.lazy(() => import("../pages/ShopDetails"));
 
 const Orders = React.lazy(() => import("../pages/Orders"));
 
+const Cart = React.lazy(() => import("../pages/Cart"));
+
 const Seller = React.lazy(() => import("../pages/Seller"));
 const BecomeSeller = React.lazy(() => import("../pages/BecomeSeller"));
 
@@ -26,6 +28,7 @@ export const RouteList = () => {
       <Route path="/shops/:id" element={<ShopDetails />} />
 
       <Route path="/orders" element={<Orders />} />
+      <Route path="/cart" element={<Cart />} />
       <Route path="/seller" element={<Seller />} />
       <Route path="/seller/create" element={<BecomeSeller />} />
 

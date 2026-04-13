@@ -1,3 +1,6 @@
+import React from "react";
+import toast from "react-hot-toast";
+import { useSearchParams } from "react-router-dom";
 import {
   Alert,
   Box,
@@ -14,12 +17,9 @@ import {
   LoginFormValidationSchema,
 } from "../../validations";
 import { loginFormStyles } from "./styles";
-import { BasicTextField } from "../../../../shared/components/BasicTextField";
 import { useLoginMutation } from "../../hooks";
+import { BasicTextField } from "../../../../shared/components/BasicTextField";
 import { useRegistrationStore } from "../../../RegistrationModule/store/useRegistrationStore";
-import toast from "react-hot-toast";
-import React from "react";
-import { useSearchParams } from "react-router-dom";
 
 /**
  * Форма входа в систему.

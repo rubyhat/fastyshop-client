@@ -40,7 +40,7 @@ export const ShopDetailsModule = () => {
     return (
       <React.Fragment>
         <BasicPageHeader
-          title="Просмотр магазина"
+          title="Настройки магазина"
           shownBackArrowButton
           backButtonLink="/seller"
         />

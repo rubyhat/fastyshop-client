@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 import { Alert, Box, Button, Skeleton } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,7 +24,6 @@ import {
   useGetSellerProfileByUserIdQuery,
 } from "../../shared/hooks";
 import { useIsSeller, useUserProfile } from "../../shared/permissions/hooks";
-import toast from "react-hot-toast";
 
 interface ShopFormModuleProps {
   mode: "create" | "update";
@@ -116,6 +116,9 @@ export const ShopFormModule = ({
     onSuccessCallback,
   });
 
+  const isFormDisabled =
+    patchShopMutation.isPending || createShopMutation.isPending;
+
   const onSubmit = (data: ShopFormData) => {
     if (mode === "update" && !editingShop) {
       toast.error(
@@ -151,7 +154,7 @@ export const ShopFormModule = ({
               label="Тип магазина:"
               placeholder="Онлайн/гибрид/оффлайн"
               data={shopTypesSelectOptions()}
-              disabled={false}
+              disabled={isFormDisabled}
             />
             {shop_type && (
               <Box pt={2}>
@@ -168,7 +171,7 @@ export const ShopFormModule = ({
               name="title"
               label="Название магазина"
               placeholder="Введите название магазина"
-              // disabled={legalProfileMutation.isPending}
+              disabled={isFormDisabled}
             />
           </Box>
           <Box sx={{ pb: 2 }}>
@@ -183,7 +186,7 @@ export const ShopFormModule = ({
                   data={dataShopsCategories.map(({ id, title }) => {
                     return { value: id, label: title };
                   })}
-                  disabled={false}
+                  disabled={isFormDisabled}
                 />
                 <Alert severity="info" sx={{ mt: 2 }}>
                   <strong>Категория магазина</strong>
@@ -210,7 +213,7 @@ export const ShopFormModule = ({
                   buttonLabel: "+ Создать новый",
                   onButtonClick: () => setShowLegalProfileFormDrawer(true),
                 }}
-                disabled={false}
+                disabled={isFormDisabled}
               />
             )}
           </Box>
@@ -219,7 +222,7 @@ export const ShopFormModule = ({
               name="contact_phone"
               label="Контактный телефон магазина"
               placeholder="+77012345678"
-              // disabled={legalProfileMutation.isPending}
+              disabled={isFormDisabled}
             />
           </Box>
           <Box pb={2}>
@@ -227,7 +230,7 @@ export const ShopFormModule = ({
               name="contact_email"
               label="Контактный e-mail магазина"
               placeholder="mail@fastyshop.kz"
-              // disabled={legalProfileMutation.isPending}
+              disabled={isFormDisabled}
             />
           </Box>
           {shop_type !== ShopType.online && (
@@ -236,7 +239,7 @@ export const ShopFormModule = ({
                 name="physical_address"
                 label="Физический адрес магазина"
                 placeholder="mail@fastyshop.kz"
-                // disabled={legalProfileMutation.isPending}
+                disabled={isFormDisabled}
               />
             </Box>
           )}
@@ -246,7 +249,7 @@ export const ShopFormModule = ({
             variant="contained"
             color="secondary"
             onClick={handleResetForm}
-            // disabled={legalProfileMutation.isPending}
+            disabled={isFormDisabled}
           >
             Назад
           </Button>
@@ -254,7 +257,7 @@ export const ShopFormModule = ({
             variant="contained"
             color="primary"
             type="submit"
-            // disabled={legalProfileMutation.isPending}
+            disabled={isFormDisabled}
           >
             Продолжить
           </Button>

@@ -12,7 +12,6 @@ describe("Page Login", () => {
         <MemoryRouter>
           <Login />
         </MemoryRouter>
-        ,
       </QueryClientProvider>,
     );
 

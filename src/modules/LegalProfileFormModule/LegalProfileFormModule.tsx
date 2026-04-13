@@ -127,7 +127,7 @@ export const LegalProfileFormModule = ({
               label="Юридическая форма:"
               placeholder="Укажите юридическую форму компании"
               data={legalFormSelectOptions()}
-              disabled={false}
+              disabled={isFormDisabled}
             />
           </Box>
           <Box sx={{ pb: 2 }}>
@@ -136,7 +136,7 @@ export const LegalProfileFormModule = ({
               label="Страна:"
               placeholder="Выберите страну"
               data={countrySelectOptions()}
-              disabled={false}
+              disabled={isFormDisabled}
             />
             <Alert severity="info" sx={{ mt: 2 }}>
               Страна деятельности компании. От выбранной страны будут зависеть

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { IoMdSettings } from "react-icons/io";
-import { Box, IconButton, Paper, Typography } from "@mui/material";
+import { Box, Button, IconButton, Paper, Typography } from "@mui/material";
 
 import { useShopDetailsStore } from "../../store";
 import {
@@ -86,6 +86,13 @@ export const ShopHeader = ({ dataShop }: ShopHeaderProps) => {
               123456
             </Typography>
           </Box>
+        </Box>
+      </Box>
+      <Box pt={2}>
+        <Box component={Link} to={`/shops/${dataShop.id}`}>
+          <Button variant="contained" fullWidth>
+            Открыть страницу магазина
+          </Button>
         </Box>
       </Box>
     </Box>

@@ -103,7 +103,7 @@ export const customTheme = createTheme(
       },
     },
     typography: {
-      fontFamily: `"Nunito", "Helvetica", "Roboto", sans-serif`,
+      fontFamily: `"SF Pro", "SF Pro Display", "Helvetica", "Roboto", sans-serif`,
       // Titles
       titleLargeRegular: {
         ...titleLarge,

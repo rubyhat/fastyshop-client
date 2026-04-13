@@ -1,18 +1,20 @@
+import { Alert, Box, Button } from "@mui/material";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
+
 import { useRegistrationStore } from "../../store/useRegistrationStore";
-import { Alert, Box, Button } from "@mui/material";
-import { devLogger } from "../../../../shared/utils";
-import { BasicTextField } from "../../../../shared/components/BasicTextField";
+import { usePostNewUserMutation } from "../../hooks";
 import {
   RegistrationFormData,
   useRegistrationFormValidationSchema,
 } from "../../validations";
-import { BasicFormSelectField } from "../../../../shared/components/BasicFormSelectField";
+
+import { devLogger } from "../../../../shared/utils";
 import { countrySelectOptions } from "../../../../shared/constants";
 import { CountryCode } from "../../../../shared/interfaces/Country";
-import { usePostNewUserMutation } from "../../hooks";
+import { BasicTextField } from "../../../../shared/components/BasicTextField";
 import { PasswordRulesHint } from "../../../../shared/components/PasswordRulesHint";
+import { BasicFormSelectField } from "../../../../shared/components/BasicFormSelectField";
 
 export const RegistrationForm = () => {
   const setShowRegistrationDrawer = useRegistrationStore(
@@ -64,7 +66,7 @@ export const RegistrationForm = () => {
               label="Страна:"
               placeholder="Выберите страну"
               data={countrySelectOptions()}
-              disabled={false}
+              disabled={postNewUserMutation.isPending}
             />
             <Alert severity="info" sx={{ mt: 2 }}>
               Ваша страна проживания и/или деятельности. От выбранной страны

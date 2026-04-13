@@ -21,7 +21,7 @@ export default defineConfig({
     }),
   ],
   server: {
-    port: 7777,
+    port: 8888,
     open: true,
   },
   build: {

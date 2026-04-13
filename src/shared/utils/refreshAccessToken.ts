@@ -32,7 +32,7 @@ export const refreshAccessToken =
         window.location.href =
           ENVIRONMENT === "production"
             ? "https://fastyshop.kz/login?session_end=true"
-            : "http://localhost:7777/login?session_end=true";
+            : "http://localhost:8888/login?session_end=true";
       return null;
     }
   };

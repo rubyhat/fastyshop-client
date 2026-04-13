@@ -70,7 +70,7 @@ export const shopTypesSelectOptions = (): {
   value: ShopType;
   label: ShopTypeDisplayText;
 }[] => {
-  const countryList = [
+  const shopList = [
     {
       value: ShopType.online,
       label: ShopTypeDisplayText[ShopType.online],
@@ -85,5 +85,5 @@ export const shopTypesSelectOptions = (): {
     },
   ];
 
-  return countryList;
+  return shopList;
 };

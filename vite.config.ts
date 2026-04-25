@@ -21,8 +21,13 @@ export default defineConfig({
     }),
   ],
   server: {
-    port: 8888,
+    port: 6300,
+    strictPort: true,
     open: true,
+  },
+  preview: {
+    port: 6300,
+    strictPort: true,
   },
   build: {
     sourcemap: true,
